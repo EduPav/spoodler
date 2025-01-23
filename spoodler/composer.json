@@ -5,12 +5,15 @@
     },
     "autoload": {
         "psr-4": {
-            "classes\\": "spoodler/classes/"
+            "classes\\": "classes/"
         }
     },
     "authors": [
         {
             "name": "eduardo"
         }
-    ]
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    }
 }

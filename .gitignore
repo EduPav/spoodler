@@ -1,2 +1,3 @@
-spoodler/.env
+spoodler/.env*
 spoodler/vendor
+spoodler/.phpunit.cache
