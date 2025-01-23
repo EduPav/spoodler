@@ -1,14 +1,13 @@
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     email VARCHAR(100)
 );
 
 CREATE TABLE errors (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY, 
     message VARCHAR(255) NOT NULL,
     file VARCHAR(255) NOT NULL,
     description TEXT,
-    additional_info TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

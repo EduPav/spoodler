@@ -2,15 +2,7 @@
 
 ## Pending
 
-- Complete DbClasses. Chat with chatGPT ongoing.
-  - Complete DbConnection and test it (DONE)
-  - Add base model class (CRUD) and its tests (continue main chat in pfe project with gpt4)
-  - Add specific models
-- Autoenvío de errores
-
-### DbConnection
-
-- Modify the throw so it uses ServerException or sth more appropriate to the ones we use in the original project.
+- Autoenvío de errores.
 
 ---
 
@@ -28,6 +20,11 @@
 
 ## Done
 
+- Complete DbClasses
+  - Complete DbConnection and test it (DONE)
+  - Add base model class (CRUD) and its tests (DONE)
+  - Add specific models and their tests(DONE)
+- Use a different db for testing
 - Create exceptions structure based on original project. Only use needed ones.
 - Set phpunit. Continue tutorial of last chat with chatgpt. I have an error when running this with the example class hello
   docker-compose exec php vendor/bin/phpunit

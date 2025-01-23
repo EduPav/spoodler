@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Dotenv\Dotenv;
 
 // Load environment variables from .env file
-if (file_exists(__DIR__ . '/../.env')) {
+if (file_exists(__DIR__ . '/../.env.testing')) {
     $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
 }

@@ -28,14 +28,29 @@ services:
     image: mysql:8.0
     container_name: spoodler_db
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-admin}
+      MYSQL_DATABASE: ${DB_NAME:-spoodler}
+      MYSQL_USER: ${DB_USER:-admin}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-admin}
     volumes:
       - ./docker/db:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    networks:
+      - spoodler_network
+      
+  test_db:
+    image: mysql:8.0
+    container_name: spoodler_test_db
+    volumes:
+      - ./docker/db:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: spoodler_test
+      MYSQL_USER: spoodler_user
+      MYSQL_PASSWORD: spoodler_password
+    ports:
+      - "3307:3306"
     networks:
       - spoodler_network
 

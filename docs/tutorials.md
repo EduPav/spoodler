@@ -30,6 +30,19 @@ Remove with:
 
 `docker exec -ti spoodler_php /bin/bash`
 
+## db
+
+### Connect to db
+
+`docker exec -ti spoodler_db mysql -u <user> -p <dbName>`
+
+test:
+
+`docker exec -ti spoodler_test_db mysql -u spoodler_user -p spoodler_test'`
+Then set password: 
+`spoodler_password`
+And run:
+`SELECT * FROM errors;`
 ---
 
 ## PHP
