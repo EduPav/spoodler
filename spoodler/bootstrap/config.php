@@ -1,6 +1,6 @@
 <?php
 
-$config = [
+$CONFIG = [
     'db' => [
         'host' => $_ENV['DB_HOST'],
         'name' => $_ENV['DB_NAME'],
