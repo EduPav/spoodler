@@ -4,7 +4,7 @@ use classes\api\exception\server\InternalServerErrorException;
 use classes\db\UserTable;
 use PHPUnit\Framework\TestCase;
 
-class UserTest extends TestCase
+class UserTableTest extends TestCase
 {
     public function testGetTableNameExpectTableName()
     {

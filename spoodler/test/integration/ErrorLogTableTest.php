@@ -7,7 +7,7 @@ use classes\db\ErrorLogTable;
 use classes\db\DbConnection;
 
 // This test class also helps us test BaseModel, as it was an abstract class.
-class ErrorLogTest extends TestCase
+class ErrorLogTableTest extends TestCase
 {
     private ErrorLogTable $errorLogTable;
 
