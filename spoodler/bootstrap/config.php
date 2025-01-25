@@ -1,13 +1,16 @@
 <?php
 
-$CONFIG = [
-    'db' => [
-        'host' => $_ENV['DB_HOST'],
-        'name' => $_ENV['DB_NAME'],
-        'user' => $_ENV['DB_USER'],
-        'password' => $_ENV['DB_PASSWORD'],
+$GLOBALS['config']['api'] = [
+    'baseUrl' => 'http://spoodler:8080/api'
+];
+$GLOBALS['config']['timeZone'] = 'America/Argentina/Buenos_Aires';
+$GLOBALS['config']['db'] = [
+    'errors' => [
+        'columns' => ['message', 'file', 'description', 'created_at'],
+        'requiredColumns' => ['description', 'created_at']
     ],
-    'api' => [
-        'base_url' => 'http://spoodler:8080/api',
-    ],
+    'users' => [
+        'columns' => ['username'],
+        'requiredColumns' => ['username']
+    ]
 ];

@@ -1,6 +1,7 @@
 <?php
 
 use classes\api\exception\client\NotFoundException;
+use classes\api\exception\server\InternalServerErrorException;
 use PHPUnit\Framework\TestCase;
 use classes\db\ErrorLogTable;
 use classes\db\DbConnection;
@@ -22,7 +23,7 @@ class ErrorLogTest extends TestCase
 
     private function insertErrorLog(int $messageNumber = 1)
     {
-        return $this->errorLogTable->create([
+        return $this->errorLogTable->insert([
             "message" => "Test error message $messageNumber",
             "file" => "spoodler/test.php",
             "description" => "This is a test error message.",
@@ -30,17 +31,40 @@ class ErrorLogTest extends TestCase
         ]);
     }
 
-    public function testCreateErrorLogExpectFirstIndex(): void
+    public function testInsertErrorLogExpectFirstIndex(): void
     {
         $id = $this->insertErrorLog(1);
         $this->assertEquals(1, $id);
     }
 
-    public function testCreate2ErrorLogsExpectSecondIndex(): void
+    public function testInsert2ErrorLogsExpectSecondIndex(): void
     {
         $this->insertErrorLog(1);
         $id = $this->insertErrorLog(2);
         $this->assertEquals(2, $id);
+    }
+
+    public function testInsertWithInvalidColumnExpectInternalServerError(): void
+    {
+        $this->expectException(InternalServerErrorException::class);
+        $this->expectExceptionMessage("Invalid column: madeUpColumn for insert in errors table");
+        $this->errorLogTable->insert([
+            "message" => "Test error message",
+            "file" => "spoodler/test.php",
+            "madeUpColumn" => "This is a test error message.",
+            "created_at" => "2025-01-23 20:15:00"
+        ]);
+    }
+
+    public function testInsertWithoutRequiredColumnExpectInternalServerError(): void
+    {
+        $this->expectException(InternalServerErrorException::class);
+        $this->expectExceptionMessage("Missing required column: description for insert in errors table");
+        $this->errorLogTable->insert([
+            "message" => "Test error message",
+            "file" => "spoodler/test.php",
+            "created_at" => "2025-01-23 20:15:00"
+        ]);
     }
 
     public function testGetAllErrorLogsExpectLogsArray(): void

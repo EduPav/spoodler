@@ -2,6 +2,7 @@
 
 namespace classes\db;
 
+use classes\api\exception\server\InternalServerErrorException;
 use PDO;
 use classes\api\exception\client\NotFoundException;
 
@@ -30,16 +31,40 @@ abstract class BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: throw new NotFoundException('Element not found for id=' . $id);
     }
 
-    public function create(array $data): int
+    public function insert(array $data): int
     {
-        $columns = implode(", ", array_keys($data));
-        $placeholders = implode(", ", array_map(fn($key) => ":$key", array_keys($data)));
+        $columns = array_keys($data);
+        $this->assertValidColumns($columns);
+        $this->assertRequiredColumns($columns);
 
-        $sql = "INSERT INTO " . $this->getTableName() . " ($columns) VALUES ($placeholders)";
+        $columnsForQuery = implode(", ", $columns);
+        $placeholdersForQuery = implode(", ", array_map(fn($key) => ":$key", array_keys($data)));
+
+        $sql = "INSERT INTO " . $this->getTableName() . " ($columnsForQuery) VALUES ($placeholdersForQuery)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute($data);
 
         return (int) $this->db->lastInsertId();
+    }
+
+    protected function assertValidColumns(array $columns): void
+    {
+        $tableName = $this->getTableName();
+        foreach ($columns as $column) {
+            if (!in_array($column, $GLOBALS['config']['db']["$tableName"]['columns'])) {
+                throw new InternalServerErrorException("Invalid column: $column for insert in $tableName table");
+            }
+        }
+    }
+
+    protected function assertRequiredColumns(array $columns): void
+    {
+        $tableName = $this->getTableName();
+        foreach ($GLOBALS['config']['db']["$tableName"]['requiredColumns'] as $column) {
+            if (!in_array($column, $columns)) {
+                throw new InternalServerErrorException("Missing required column: $column for insert in $tableName table");
+            }
+        }
     }
 
     // public function update(int $id, array $data): bool
