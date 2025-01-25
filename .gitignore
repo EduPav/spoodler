@@ -3,3 +3,4 @@ spoodler/vendor
 spoodler/.phpunit.cache
 spoodler/test/unit/classes/HelloTest.php
 spoodler/classes/report/Hello.php
+spoodler/logs

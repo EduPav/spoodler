@@ -2,7 +2,8 @@
 
 ## Pending
 
-- Autoenvío de errores.
+- Check info logging in file.
+- UI with 3 pages. Home with all reports, Single report page and stats one.
 
 ---
 
@@ -14,12 +15,16 @@
 - user, and i guess also passwords, databases.
 - stats endpoint for graphical and statistical analysis.
 
-- Decidido levantar una db toda con datos artificiales. Y que se pierdan los agregados en una ejecución específica.
-
 ---
 
 ## Done
 
+- Increase table classes robustness
+- Set up logger:
+  - Save general uncaught errors and exceptions to db. (classes LoggerBuilder and PDOHandler)
+  - Save caught exceptions to db (classes LoggerBuilder and PDOHandler)
+  - tests for PDOHandler
+- Fix using test and dev same db.
 - Complete DbClasses
   - Complete DbConnection and test it (DONE)
   - Add base model class (CRUD) and its tests (DONE)

@@ -20,9 +20,9 @@ When done changes to docker-compose restart server:
 ### Install packages
 
 To add a new package with composer run:
-`docker-compose exec php composer require guzzlehttp/guzzle`
+`docker-compose exec php composer require monolog/monolog`
 Remove with:
-`docker-compose exec php composer remove guzzlehttp/guzzle`
+`docker-compose exec php composer remove monolog/monolog`
 
 ---
 
@@ -50,7 +50,7 @@ And run:
 ### Globals and secrets
 
 When init.php is included in your endpoint `require_once __DIR__ . '/bootstrap/init.php';`
-all envs are in `$_ENV` and all globals in `$CONFIG`
+all envs are in `$_ENV` and all globals in `$GLOBALS['config']`
 
 ### Run tests
 
