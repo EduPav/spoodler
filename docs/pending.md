@@ -2,7 +2,7 @@
 
 ## Pending
 
-- Check info logging in file.
+- Implement example endpoint.
 - UI with 3 pages. Home with all reports, Single report page and stats one.
 
 ---
@@ -19,6 +19,7 @@
 
 ## Done
 
+- Implement my PFE MVC classes
 - Increase table classes robustness
 - Set up logger:
   - Save general uncaught errors and exceptions to db. (classes LoggerBuilder and PDOHandler)
