@@ -2,23 +2,28 @@
 
 ## Pending
 
-- Implement example endpoint.
+- Create RESTful report and reports endpoints. WIth full crud? routes? learn structure.
 - UI with 3 pages. Home with all reports, Single report page and stats one.
+- Html view and its tests
 
 ---
 
 ## Professor requirements:
 
-- Add deleted endpoint as an example to the official pdf report?
 - RESTful API.
 - Some sort of security. ssl certs? Multifactor auth?
 - user, and i guess also passwords, databases.
 - stats endpoint for graphical and statistical analysis.
+- Insomnia testing (not required by him, but wants different types of tests).
 
 ---
 
 ## Done
 
+- Create lib with functions to handle user input. Create those with chatGPT to get
+  different code than original.
+- Implement example endpoint. (LegacyHandler.php, report.php)
+- Add MVC classes tests.
 - Implement my PFE MVC classes
 - Increase table classes robustness
 - Set up logger:
