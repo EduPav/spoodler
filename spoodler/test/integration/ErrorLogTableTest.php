@@ -21,9 +21,9 @@ class ErrorLogTableTest extends TestCase
         $db->exec("TRUNCATE TABLE {$this->errorLogTable->getTableName()}");
     }
 
-    private function insertErrorLog(int $messageNumber = 1)
+    private function createErrorLog(int $messageNumber = 1)
     {
-        return $this->errorLogTable->insert([
+        return $this->errorLogTable->create([
             "message" => "Test error message $messageNumber",
             "file" => "spoodler/test.php",
             "description" => "This is a test error message.",
@@ -31,24 +31,24 @@ class ErrorLogTableTest extends TestCase
         ]);
     }
 
-    public function testInsertErrorLogExpectFirstIndex(): void
+    public function testCreateErrorLogExpectFirstIndex(): void
     {
-        $id = $this->insertErrorLog(1);
+        $id = $this->createErrorLog(1);
         $this->assertEquals(1, $id);
     }
 
-    public function testInsert2ErrorLogsExpectSecondIndex(): void
+    public function testCreate2ErrorLogsExpectSecondIndex(): void
     {
-        $this->insertErrorLog(1);
-        $id = $this->insertErrorLog(2);
+        $this->createErrorLog(1);
+        $id = $this->createErrorLog(2);
         $this->assertEquals(2, $id);
     }
 
-    public function testInsertWithInvalidColumnExpectInternalServerError(): void
+    public function testCreateWithInvalidColumnExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
-        $this->expectExceptionMessage("Invalid column: madeUpColumn for insert in errors table");
-        $this->errorLogTable->insert([
+        $this->expectExceptionMessage("Invalid column: madeUpColumn for create in errors table");
+        $this->errorLogTable->create([
             "message" => "Test error message",
             "file" => "spoodler/test.php",
             "madeUpColumn" => "This is a test error message.",
@@ -56,11 +56,11 @@ class ErrorLogTableTest extends TestCase
         ]);
     }
 
-    public function testInsertWithoutRequiredColumnExpectInternalServerError(): void
+    public function testCreateWithoutRequiredColumnExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
-        $this->expectExceptionMessage("Missing required column: description for insert in errors table");
-        $this->errorLogTable->insert([
+        $this->expectExceptionMessage("Missing required column: description for create in errors table");
+        $this->errorLogTable->create([
             "message" => "Test error message",
             "file" => "spoodler/test.php",
             "created_at" => "2025-01-23 20:15:00"
@@ -69,9 +69,9 @@ class ErrorLogTableTest extends TestCase
 
     public function testGetAllErrorLogsExpectLogsArray(): void
     {
-        // Insert mock data
-        $this->insertErrorLog(1);
-        $this->insertErrorLog(2);
+        // create mock data
+        $this->createErrorLog(1);
+        $this->createErrorLog(2);
         $logs = $this->errorLogTable->getAll();
         $this->assertEquals([
             [
@@ -93,8 +93,8 @@ class ErrorLogTableTest extends TestCase
 
     public function testGetByIdExpectLog(): void
     {
-        $this->insertErrorLog(1);
-        $id = $this->insertErrorLog(2);
+        $this->createErrorLog(1);
+        $id = $this->createErrorLog(2);
         $log = $this->errorLogTable->getById($id);
 
         $this->assertEquals(
@@ -111,7 +111,7 @@ class ErrorLogTableTest extends TestCase
 
     public function testGetByIdExpectNotFound(): void
     {
-        $this->insertErrorLog(1);
+        $this->createErrorLog(1);
 
         $this->expectException(NotFoundException::class);
         $this->errorLogTable->getById(2);
@@ -120,5 +120,73 @@ class ErrorLogTableTest extends TestCase
     public function testGetTableNameExpectTableName()
     {
         $this->assertEquals("errors", $this->errorLogTable->getTableName());
+    }
+
+    public function testUpdateErrorLogExpectSuccess(): void
+    {
+        // Create a log entry
+        $id = $this->createErrorLog(1);
+
+        // Update the log entry
+        $updated = $this->errorLogTable->update($id, [
+            "message" => "Updated error message",
+            "file" => "spoodler/updated_test.php",
+            "description" => "This is an updated test error message.",
+            "created_at" => "2025-01-23 21:15:00"
+        ]);
+
+        $this->assertTrue($updated);
+
+        // Verify the update
+        $log = $this->errorLogTable->getById($id);
+
+        $this->assertEquals(
+            [
+                "message" => "Updated error message",
+                "file" => "spoodler/updated_test.php",
+                "description" => "This is an updated test error message.",
+                "created_at" => "2025-01-23 21:15:00",
+                "id" => $id
+            ],
+            $log
+        );
+    }
+
+    public function testUpdateErrorLogExpectInternalServerError(): void
+    {
+        $this->expectException(InternalServerErrorException::class);
+        $this->expectExceptionMessage('Update errors with id=9999 failed');
+
+        // Attempt to update a non-existing log entry
+        $this->errorLogTable->update(9999, [
+            "message" => "Non-existing error",
+            "file" => "non_existing_test.php",
+            "description" => "Trying to update a non-existing log.",
+            "created_at" => "2025-01-23 21:15:00"
+        ]);
+    }
+
+    public function testDeleteErrorLogExpectSuccess(): void
+    {
+        // Create a log entry
+        $id = $this->createErrorLog(1);
+
+        // Delete the log entry
+        $deleted = $this->errorLogTable->delete($id);
+
+        $this->assertTrue($deleted);
+
+        // Verify the deletion
+        $this->expectException(NotFoundException::class);
+        $this->errorLogTable->getById($id);
+    }
+
+    public function testDeleteErrorLogExpectInternalServerError(): void
+    {
+        $this->expectException(InternalServerErrorException::class);
+        $this->expectExceptionMessage('Delete errors with id=9999 failed');
+
+        // Attempt to delete a non-existing log entry
+        $this->errorLogTable->delete(9999);
     }
 }

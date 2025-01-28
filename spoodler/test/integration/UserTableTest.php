@@ -12,22 +12,22 @@ class UserTableTest extends TestCase
         $this->assertEquals("users", $userTable->getTableName());
     }
 
-    public function testInsertWithInvalidColumnExpectInternalServerError(): void
+    public function testCreateWithInvalidColumnExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
-        $this->expectExceptionMessage("Invalid column: madeUpColumn for insert in users table");
+        $this->expectExceptionMessage("Invalid column: madeUpColumn for create in users table");
         $userTable = new UserTable();
-        $userTable->insert([
+        $userTable->create([
             "username" => "admin",
             "madeUpColumn" => "admin@yahoo.com.ar"
         ]);
     }
 
-    public function testInsertWithoutRequiredColumnExpectInternalServerError(): void
+    public function testCreateWithoutRequiredColumnExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
-        $this->expectExceptionMessage("Missing required column: username for insert in users table");
+        $this->expectExceptionMessage("Missing required column: username for create in users table");
         $userTable = new UserTable();
-        $userTable->insert([]);
+        $userTable->create([]);
     }
 }

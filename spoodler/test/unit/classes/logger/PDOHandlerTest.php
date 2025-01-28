@@ -23,7 +23,7 @@ class PDOHandlerTest extends TestCase
         $this->pdoHandler = new PDOHandler($this->errorTableMock);
     }
 
-    public function testWriteInsertsCorrectData(): void
+    public function testWriteCreatesCorrectData(): void
     {
         // Set up a LogRecord to simulate a log entry
         $logRecord = new LogRecord(
@@ -37,7 +37,7 @@ class PDOHandlerTest extends TestCase
             ]
         );
 
-        // Define the expected data to be inserted
+        // Define the expected data to be created
         $expectedData = [
             'message' => 'Test short message',
             'file' => '/path/to/file.php',
@@ -45,10 +45,10 @@ class PDOHandlerTest extends TestCase
             'created_at' => '2025-01-25 09:00:00', // Converted to Argentinian time (UTC-3)
         ];
 
-        // Expect the insert method to be called once with the expected data
+        // Expect the create method to be called once with the expected data
         $this->errorTableMock
             ->expects($this->once())
-            ->method('insert')
+            ->method('create')
             ->with($expectedData);
 
         // Call the write method indirectly to test
@@ -66,7 +66,7 @@ class PDOHandlerTest extends TestCase
             [] // Empty context
         );
 
-        // Define the expected data to be inserted
+        // Define the expected data to be created
         $expectedData = [
             'message' => 'Undetermined',
             'file' => 'Undetermined',
@@ -74,10 +74,10 @@ class PDOHandlerTest extends TestCase
             'created_at' => '2025-01-25 09:00:00', // Converted to Argentinian time (UTC-3)
         ];
 
-        // Expect the insert method to be called once with the expected data
+        // Expect the create method to be called once with the expected data
         $this->errorTableMock
             ->expects($this->once())
-            ->method('insert')
+            ->method('create')
             ->with($expectedData);
 
         // Call the write method indirectly to test
@@ -99,7 +99,7 @@ class PDOHandlerTest extends TestCase
             ]
         );
 
-        // Define the expected data to be inserted
+        // Define the expected data to be created
         $expectedData = [
             'message' => str_repeat('A', 255), // Truncated to 255 characters
             'file' => '/path/to/file.php',
@@ -107,10 +107,10 @@ class PDOHandlerTest extends TestCase
             'created_at' => '2025-01-25 09:00:00', // Converted to Argentinian time (UTC-3)
         ];
 
-        // Expect the insert method to be called once with the expected data
+        // Expect the create method to be called once with the expected data
         $this->errorTableMock
             ->expects($this->once())
-            ->method('insert')
+            ->method('create')
             ->with($expectedData);
 
         // Call the write method to test

@@ -6,6 +6,7 @@ use classes\api\exception\server\InternalServerErrorException;
 use PDO;
 use classes\api\exception\client\NotFoundException;
 
+// As this is an abstract class, most of its methods are tested in ErrorLogTableTest.php
 abstract class BaseModel
 {
     protected PDO $db;
@@ -31,7 +32,7 @@ abstract class BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: throw new NotFoundException('Element not found for id=' . $id);
     }
 
-    public function insert(array $data): int
+    public function create(array $data): int
     {
         $columns = array_keys($data);
         $this->assertValidColumns($columns);
@@ -47,40 +48,53 @@ abstract class BaseModel
         return (int) $this->db->lastInsertId();
     }
 
-    protected function assertValidColumns(array $columns): void
+    private function assertValidColumns(array $columns): void
     {
         $tableName = $this->getTableName();
         foreach ($columns as $column) {
             if (!in_array($column, $GLOBALS['config']['db']["$tableName"]['columns'])) {
-                throw new InternalServerErrorException("Invalid column: $column for insert in $tableName table");
+                throw new InternalServerErrorException("Invalid column: $column for create in $tableName table");
             }
         }
     }
 
-    protected function assertRequiredColumns(array $columns): void
+    private function assertRequiredColumns(array $columns): void
     {
         $tableName = $this->getTableName();
         foreach ($GLOBALS['config']['db']["$tableName"]['requiredColumns'] as $column) {
             if (!in_array($column, $columns)) {
-                throw new InternalServerErrorException("Missing required column: $column for insert in $tableName table");
+                throw new InternalServerErrorException("Missing required column: $column for create in $tableName table");
             }
         }
     }
 
-    // public function update(int $id, array $data): bool
-    // {
-    //     $setClause = implode(", ", array_map(fn($key) => "$key = :$key", array_keys($data)));
+    public function update(int $id, array $data): bool
+    {
+        $columns = array_keys($data);
+        $this->assertValidColumns($columns);
+        $this->assertRequiredColumns($columns);
 
-    //     $sql = "UPDATE " . $this->getTableName() . " SET $setClause WHERE id = :id";
-    //     $stmt = $this->db->prepare($sql);
-    //     $data['id'] = $id;
+        $setClause = implode(", ", array_map(fn($key) => "$key = :$key", $columns));
 
-    //     return $stmt->execute($data);
-    // }
+        $sql = "UPDATE " . $this->getTableName() . " SET $setClause WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $data['id'] = $id;
 
-    // public function delete(int $id): bool
-    // {
-    //     $stmt = $this->db->prepare("DELETE FROM " . $this->getTableName() . " WHERE id = :id");
-    //     return $stmt->execute(['id' => $id]);
-    // }
+        $stmt->execute($data);
+        if ($stmt->rowCount() === 0) {
+            throw new InternalServerErrorException('Update ' . $this->getTableName() . " with id=$id failed");
+        }
+        return true;
+    }
+
+    public function delete(int $id): bool
+    {
+        $stmt = $this->db->prepare("DELETE FROM " . $this->getTableName() . " WHERE id = :id");
+
+        $stmt->execute(['id' => $id]);
+        if ($stmt->rowCount() === 0) {
+            throw new InternalServerErrorException('Delete ' . $this->getTableName() . " with id=$id failed");
+        }
+        return true;
+    }
 }

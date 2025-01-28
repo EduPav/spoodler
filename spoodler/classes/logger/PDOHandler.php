@@ -27,6 +27,6 @@ class PDOHandler extends AbstractProcessingHandler
                 ->setTimezone(new \DateTimeZone($GLOBALS['config']["timeZone"])) // Adjusted to Arg time
                 ->format('Y-m-d H:i:s'),
         ];
-        $this->errorTable->insert($data);
+        $this->errorTable->create($data);
     }
 }
