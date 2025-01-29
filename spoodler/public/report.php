@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/bootstrap/init.php';
+require_once __DIR__ . '/../bootstrap/init.php';
 
 use classes\api\Header;
 use classes\api\legacy\control\LegacyController;
