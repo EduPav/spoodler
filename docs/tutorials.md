@@ -20,9 +20,9 @@ When done changes to docker-compose restart server:
 ### Install packages
 
 To add a new package with composer run:
-`docker-compose exec php composer require monolog/monolog`
+`docker-compose exec php composer require flightphp/core`
 Remove with:
-`docker-compose exec php composer remove monolog/monolog`
+`docker-compose exec php composer remove flightphp/core`
 
 ---
 
@@ -39,10 +39,11 @@ Remove with:
 test:
 
 `docker exec -ti spoodler_test_db mysql -u spoodler_user -p spoodler_test'`
-Then set password: 
+Then set password:
 `spoodler_password`
 And run:
 `SELECT * FROM errors;`
+
 ---
 
 ## PHP

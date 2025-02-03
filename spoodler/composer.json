@@ -2,7 +2,8 @@
     "name": "eduardo/spoodler",
     "require": {
         "vlucas/phpdotenv": "^5.5",
-        "monolog/monolog": "^3.8"
+        "monolog/monolog": "^3.8",
+        "flightphp/core": "^3.13"
     },
     "autoload": {
         "psr-4": {
