@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php'; // Load Composer autoloader
 require __DIR__ . '/config.php'; // Set global constants or configurations
