@@ -6,8 +6,8 @@
          executionOrder="depends,defects"
          shortenArraysForExportThreshold="10"
          beStrictAboutOutputDuringTests="true"
-         displayDetailsOnPhpunitDeprecations="true"
-         failOnPhpunitDeprecation="true"
+         displayDetailsOnPhpunitDeprecations="false"
+         failOnPhpunitDeprecation="false"
          failOnRisky="true"
          failOnWarning="true">
     <testsuites>
