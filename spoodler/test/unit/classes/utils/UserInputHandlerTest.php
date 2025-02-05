@@ -109,4 +109,36 @@ class UserInputHandlerTest extends TestCase
         $this->expectExceptionMessage("Unsupported validation type: $unsupportedType");
         $this->handler->requireSanitizeValidate($array, 'key', $unsupportedType);
     }
+
+    public function testAssertIntValidString(): void
+    {
+        $input = "100";
+        // Should pass without throwing an exception.
+        $this->handler->assertInt($input, 'input');
+        $this->addToAssertionCount(1);
+    }
+
+    public function testAssertIntValidInteger(): void
+    {
+        $input = 200;
+        // Integers are integers—even when they don't wear quotes.
+        $this->handler->assertInt($input, 'input');
+        $this->addToAssertionCount(1);
+    }
+
+    public function testAssertIntFailureWithAlphabeticString(): void
+    {
+        $input = "abc";
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessage("input must be an integer: input='abc'");
+        $this->handler->assertInt($input, 'input');
+    }
+
+    public function testAssertIntFailureWithFloatString(): void
+    {
+        $input = "12.3";
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessage("input must be an integer: input='12.3'");
+        $this->handler->assertInt($input, 'input');
+    }
 }

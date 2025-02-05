@@ -18,6 +18,20 @@ class UserInputHandler
     }
 
     /**
+     * Assert that the input is an integer.
+     * Throws BadRequestException if the input is not an integer.
+     * @param mixed $input The input to validate.
+     * @param string $keyName The name of the key being validated.
+     * @throws BadRequestException If validation fails.
+     */
+    public function assertInt(mixed $input, string $keyName): void
+    {
+        if (filter_var($input, FILTER_VALIDATE_INT) === false) {
+            throw new BadRequestException("$keyName must be an integer: $keyName='$input'");
+        }
+    }
+
+    /**
      * Validate input against specific rules.
      * Throws BadRequestException if validation fails.
      * @param string $input The input to validate.
@@ -30,9 +44,7 @@ class UserInputHandler
     {
         switch ($type) {
             case 'integer':
-                if (filter_var($input, FILTER_VALIDATE_INT) === false) {
-                    throw new BadRequestException("$keyName must be an integer: $keyName='$input'");
-                }
+                $this->assertInt($input, $keyName);
                 $convertedValue = (int) $input;
                 return $convertedValue;
 
