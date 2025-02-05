@@ -32,7 +32,7 @@ class ApiTest extends TestCase
         $this->engineMock->method('response')->willReturn($this->responseMock);
     }
 
-    public function testRunSuccess(): void
+    function testRunSuccess(): void
     {
         $this->engineMock->expects($this->once())
             ->method('start');
@@ -43,7 +43,7 @@ class ApiTest extends TestCase
         $api->run();
     }
 
-    public function testRunClientException(): void
+    function testRunClientException(): void
     {
         $this->loggerMock->expects($this->once())
             ->method('warning');
@@ -60,7 +60,7 @@ class ApiTest extends TestCase
         $api->run();
     }
 
-    public function testRunServerException(): void
+    function testRunServerException(): void
     {
         $this->loggerMock->expects($this->once())
             ->method('error');
@@ -77,7 +77,7 @@ class ApiTest extends TestCase
         $api->run();
     }
 
-    public function testRunGenericThrowable(): void
+    function testRunGenericThrowable(): void
     {
         $this->loggerMock->expects($this->once())
             ->method('error');

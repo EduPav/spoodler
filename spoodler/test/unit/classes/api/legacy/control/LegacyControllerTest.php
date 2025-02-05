@@ -15,7 +15,7 @@ use Monolog\Logger;
 
 class LegacyControllerTest extends TestCase
 {
-    public function testHandleSuccessResponseExpectMockCallsAndReturnRenderedSuccess(): void
+    function testHandleSuccessResponseExpectMockCallsAndReturnRenderedSuccess(): void
     {
         $loggerMock = $this->createMock(Logger::class);
 
@@ -39,7 +39,7 @@ class LegacyControllerTest extends TestCase
         $this->assertSame('Rendered Success', $output);
     }
 
-    public function testHandleNotFoundExceptionExpectMockCallsAndReturnNotFound(): void
+    function testHandleNotFoundExceptionExpectMockCallsAndReturnNotFound(): void
     {
         $loggerMock = $this->createMock(Logger::class);
         $loggerMock->expects($this->once())->method('warning');
@@ -64,7 +64,7 @@ class LegacyControllerTest extends TestCase
         $this->assertSame('Not Found Rendered', $output);
     }
 
-    public function testHandleClientExceptionExpectMockCallsAndReturnClientError(): void
+    function testHandleClientExceptionExpectMockCallsAndReturnClientError(): void
     {
         $loggerMock = $this->createMock(Logger::class);
         $loggerMock->expects($this->once())->method('warning');
@@ -89,7 +89,7 @@ class LegacyControllerTest extends TestCase
         $this->assertSame('Client Error Render', $output);
     }
 
-    public function testHandleServerExceptionExpectMockCallsAndReturnInternalServerError(): void
+    function testHandleServerExceptionExpectMockCallsAndReturnInternalServerError(): void
     {
         $loggerMock = $this->createMock(Logger::class);
         $loggerMock->expects($this->once())->method('error');
@@ -116,7 +116,7 @@ class LegacyControllerTest extends TestCase
         $this->assertSame('Generic Error Render', $output);
     }
 
-    public function testHandleGenericThrowableExpectMockCallsAndReturnGenericError(): void
+    function testHandleGenericThrowableExpectMockCallsAndReturnGenericError(): void
     {
         $loggerMock = $this->createMock(Logger::class);
         $loggerMock->expects($this->once())->method('error');

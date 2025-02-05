@@ -31,20 +31,20 @@ class ErrorLogTableTest extends TestCase
         ]);
     }
 
-    public function testCreateErrorLogExpectFirstIndex(): void
+    function testCreateErrorLogExpectFirstIndex(): void
     {
         $id = $this->createErrorLog(1);
         $this->assertEquals(1, $id);
     }
 
-    public function testCreate2ErrorLogsExpectSecondIndex(): void
+    function testCreate2ErrorLogsExpectSecondIndex(): void
     {
         $this->createErrorLog(1);
         $id = $this->createErrorLog(2);
         $this->assertEquals(2, $id);
     }
 
-    public function testCreateWithInvalidColumnExpectInternalServerError(): void
+    function testCreateWithInvalidColumnExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
         $this->expectExceptionMessage("Invalid column: madeUpColumn for create in errors table");
@@ -56,7 +56,7 @@ class ErrorLogTableTest extends TestCase
         ]);
     }
 
-    public function testCreateWithoutRequiredColumnExpectInternalServerError(): void
+    function testCreateWithoutRequiredColumnExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
         $this->expectExceptionMessage("Missing required column: description for create in errors table");
@@ -67,7 +67,7 @@ class ErrorLogTableTest extends TestCase
         ]);
     }
 
-    public function testGetAllErrorLogsExpectLogsArray(): void
+    function testGetAllErrorLogsExpectLogsArray(): void
     {
         // create mock data
         $this->createErrorLog(1);
@@ -91,7 +91,7 @@ class ErrorLogTableTest extends TestCase
         ], $logs);
     }
 
-    public function testGetByIdExpectLog(): void
+    function testGetByIdExpectLog(): void
     {
         $this->createErrorLog(1);
         $id = $this->createErrorLog(2);
@@ -109,7 +109,7 @@ class ErrorLogTableTest extends TestCase
         );
     }
 
-    public function testGetByIdExpectNotFound(): void
+    function testGetByIdExpectNotFound(): void
     {
         $this->createErrorLog(1);
 
@@ -117,12 +117,12 @@ class ErrorLogTableTest extends TestCase
         $this->errorLogTable->getById(2);
     }
 
-    public function testGetTableNameExpectTableName()
+    function testGetTableNameExpectTableName()
     {
         $this->assertEquals("errors", $this->errorLogTable->getTableName());
     }
 
-    public function testUpdateErrorLogExpectSuccess(): void
+    function testUpdateErrorLogExpectSuccess(): void
     {
         // Create a log entry
         $id = $this->createErrorLog(1);
@@ -152,7 +152,7 @@ class ErrorLogTableTest extends TestCase
         );
     }
 
-    public function testUpdateErrorLogExpectInternalServerError(): void
+    function testUpdateErrorLogExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
         $this->expectExceptionMessage('Update errors with id=9999 failed');
@@ -166,7 +166,7 @@ class ErrorLogTableTest extends TestCase
         ]);
     }
 
-    public function testDeleteErrorLogExpectSuccess(): void
+    function testDeleteErrorLogExpectSuccess(): void
     {
         // Create a log entry
         $id = $this->createErrorLog(1);
@@ -181,7 +181,7 @@ class ErrorLogTableTest extends TestCase
         $this->errorLogTable->getById($id);
     }
 
-    public function testDeleteErrorLogExpectInternalServerError(): void
+    function testDeleteErrorLogExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
         $this->expectExceptionMessage('Delete errors with id=9999 failed');

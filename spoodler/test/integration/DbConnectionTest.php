@@ -5,7 +5,7 @@ use classes\db\DbConnection;
 
 class DbConnectionTest extends TestCase
 {
-    public function testGetInstanceExpectCorrectInstance()
+    function testGetInstanceExpectCorrectInstance()
     {
         // Test that the getInstance method returns a PDO instance.
         $dbConnection = DbConnection::getInstance();

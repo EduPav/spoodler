@@ -7,7 +7,7 @@ use classes\api\legacy\Request;
 
 class RequestTest extends TestCase
 {
-    public function testGetQueryParameters(): void
+    function testGetQueryParameters(): void
     {
         $queryParameters = ["param1" => "value1", "param2" => "value2"];
         $body = ["key" => "value"];
@@ -17,7 +17,7 @@ class RequestTest extends TestCase
         $this->assertSame($queryParameters, $request->getQueryParameters());
     }
 
-    public function testGetBody(): void
+    function testGetBody(): void
     {
         $queryParameters = ["param1" => "value1", "param2" => "value2"];
         $body = ["key" => "value"];
@@ -27,7 +27,7 @@ class RequestTest extends TestCase
         $this->assertSame($body, $request->getBody());
     }
 
-    public function testEmptyQueryParametersAndBody(): void
+    function testEmptyQueryParametersAndBody(): void
     {
         $request = new Request();
 

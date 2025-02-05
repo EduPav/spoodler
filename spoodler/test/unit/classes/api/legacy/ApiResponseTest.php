@@ -7,7 +7,7 @@ use classes\api\legacy\ApiResponse;
 
 class ApiResponseTest extends TestCase
 {
-    public function testGetMessage(): void
+    function testGetMessage(): void
     {
         $message = "Success";
         $data = ["key" => "value"];
@@ -17,7 +17,7 @@ class ApiResponseTest extends TestCase
         $this->assertSame($message, $response->getMessage());
     }
 
-    public function testGetData(): void
+    function testGetData(): void
     {
         $message = "Success";
         $data = ["key" => "value"];
@@ -27,7 +27,7 @@ class ApiResponseTest extends TestCase
         $this->assertSame($data, $response->getData());
     }
 
-    public function testEmptyInputs(): void
+    function testEmptyInputs(): void
     {
         $message = "";
         $data = [];

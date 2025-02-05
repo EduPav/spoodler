@@ -12,7 +12,7 @@ class UserInputHandler
      * @param string $input The user input to sanitize.
      * @return string Sanitized input.
      */
-    public function sanitize(string $input): string
+    function sanitize(string $input): string
     {
         return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
     }
@@ -24,7 +24,7 @@ class UserInputHandler
      * @param string $keyName The name of the key being validated.
      * @throws BadRequestException If validation fails.
      */
-    public function assertInt(mixed $input, string $keyName): void
+    function assertInt(mixed $input, string $keyName): void
     {
         if (filter_var($input, FILTER_VALIDATE_INT) === false) {
             throw new BadRequestException("$keyName must be an integer: $keyName='$input'");
@@ -40,7 +40,7 @@ class UserInputHandler
      * @return mixed The validated and possibly converted value.
      * @throws BadRequestException If validation fails.
      */
-    public function validate(string $input, string $keyName, string $type): mixed
+    function validate(string $input, string $keyName, string $type): mixed
     {
         switch ($type) {
             case 'integer':
@@ -61,7 +61,7 @@ class UserInputHandler
      * @return mixed The value associated with the key.
      * @throws BadRequestException If the key is missing.
      */
-    public function requireKey(array $array, string $key): mixed
+    function requireKey(array $array, string $key): mixed
     {
         if (!array_key_exists($key, $array) || $array[$key] === null) {
             throw new BadRequestException("Parameter '$key' is required.");
@@ -78,7 +78,7 @@ class UserInputHandler
      * @return mixed The sanitized and validated value.
      * @throws BadRequestException If the key is missing or validation fails.
      */
-    public function requireSanitizeValidate(array $array, string $key, string $type): mixed
+    function requireSanitizeValidate(array $array, string $key, string $type): mixed
     {
         $value = $this->requireKey($array, $key);
         $sanitizedValue = $this->sanitize($value);

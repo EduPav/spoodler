@@ -12,7 +12,7 @@ class ErrorLogHandler
     private UserInputHandler $userInputHandler;
     private ErrorLogTable $errorTable;
 
-    public function __construct(Engine $app, ErrorLogTable $errorTable)
+    function __construct(Engine $app, ErrorLogTable $errorTable)
     {
         $this->app = $app;
         $this->userInputHandler = new UserInputHandler();

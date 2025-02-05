@@ -16,14 +16,14 @@ class UserInputHandlerTest extends TestCase
         $this->handler = new UserInputHandler();
     }
 
-    public function testSanitize(): void
+    function testSanitize(): void
     {
         $input = " <script>alert('hack');</script> ";
         $expected = "&lt;script&gt;alert(&#039;hack&#039;);&lt;/script&gt;";
         $this->assertEquals($expected, $this->handler->sanitize($input));
     }
 
-    public function testValidateIntegerSuccess(): void
+    function testValidateIntegerSuccess(): void
     {
         $input = "123";
         $result = $this->handler->validate($input, 'input', 'integer');
@@ -31,7 +31,7 @@ class UserInputHandlerTest extends TestCase
         $this->assertIsInt($result);
     }
 
-    public function testValidateIntegerFailure(): void
+    function testValidateIntegerFailure(): void
     {
         $input = "abc";
         $this->expectException(BadRequestException::class);
@@ -39,7 +39,7 @@ class UserInputHandlerTest extends TestCase
         $this->handler->validate($input, 'input', 'integer');
     }
 
-    public function testValidateUnsupportedType(): void
+    function testValidateUnsupportedType(): void
     {
         $input = "test";
         $type = "weird";
@@ -48,13 +48,13 @@ class UserInputHandlerTest extends TestCase
         $this->handler->validate($input, 'input', $type);
     }
 
-    public function testRequireKeySuccess(): void
+    function testRequireKeySuccess(): void
     {
         $array = ['key' => 'value'];
         $this->assertEquals('value', $this->handler->requireKey($array, 'key'));
     }
 
-    public function testRequireKeyMissingKey(): void
+    function testRequireKeyMissingKey(): void
     {
         $array = ['key' => 'value'];
         $missingKey = 'missingKey';
@@ -64,7 +64,7 @@ class UserInputHandlerTest extends TestCase
         $this->handler->requireKey($array, $missingKey);
     }
 
-    public function testRequireKeyEmptyKey(): void
+    function testRequireKeyEmptyKey(): void
     {
         $array = ['key' => null];
 
@@ -73,7 +73,7 @@ class UserInputHandlerTest extends TestCase
         $this->handler->requireKey($array, 'key');
     }
 
-    public function testRequireSanitizeValidateSuccess(): void
+    function testRequireSanitizeValidateSuccess(): void
     {
         $array = ['key' => ' 123 '];
         $result = $this->handler->requireSanitizeValidate($array, 'key', 'integer');
@@ -81,7 +81,7 @@ class UserInputHandlerTest extends TestCase
         $this->assertIsInt($result); // Ensures the value is an integer
     }
 
-    public function testRequireSanitizeValidateMissingKey(): void
+    function testRequireSanitizeValidateMissingKey(): void
     {
         $array = ['key' => '123'];
         $missingKey = 'missingKey';
@@ -91,7 +91,7 @@ class UserInputHandlerTest extends TestCase
         $this->handler->requireSanitizeValidate($array, $missingKey, 'integer');
     }
 
-    public function testRequireSanitizeValidateInvalidValue(): void
+    function testRequireSanitizeValidateInvalidValue(): void
     {
         $array = ['key' => 'not-an-integer'];
 
@@ -100,7 +100,7 @@ class UserInputHandlerTest extends TestCase
         $this->handler->requireSanitizeValidate($array, 'key', 'integer');
     }
 
-    public function testRequireSanitizeValidateUnsupportedType(): void
+    function testRequireSanitizeValidateUnsupportedType(): void
     {
         $array = ['key' => '123'];
         $unsupportedType = 'unsupported';
@@ -110,7 +110,7 @@ class UserInputHandlerTest extends TestCase
         $this->handler->requireSanitizeValidate($array, 'key', $unsupportedType);
     }
 
-    public function testAssertIntValidString(): void
+    function testAssertIntValidString(): void
     {
         $input = "100";
         // Should pass without throwing an exception.
@@ -118,7 +118,7 @@ class UserInputHandlerTest extends TestCase
         $this->addToAssertionCount(1);
     }
 
-    public function testAssertIntValidInteger(): void
+    function testAssertIntValidInteger(): void
     {
         $input = 200;
         // Integers are integers—even when they don't wear quotes.
@@ -126,7 +126,7 @@ class UserInputHandlerTest extends TestCase
         $this->addToAssertionCount(1);
     }
 
-    public function testAssertIntFailureWithAlphabeticString(): void
+    function testAssertIntFailureWithAlphabeticString(): void
     {
         $input = "abc";
         $this->expectException(BadRequestException::class);
@@ -134,7 +134,7 @@ class UserInputHandlerTest extends TestCase
         $this->handler->assertInt($input, 'input');
     }
 
-    public function testAssertIntFailureWithFloatString(): void
+    function testAssertIntFailureWithFloatString(): void
     {
         $input = "12.3";
         $this->expectException(BadRequestException::class);

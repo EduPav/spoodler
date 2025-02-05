@@ -10,7 +10,7 @@ use flight\Engine;
 
 class ErrorLogHandlerTest extends TestCase
 {
-    public function testGetAllErrors(): void
+    function testGetAllErrors(): void
     {
         $engineMock = $this->getMockBuilder(Engine::class)
             ->addMethods(['sendSuccess'])
@@ -34,7 +34,7 @@ class ErrorLogHandlerTest extends TestCase
         $handler->getAllErrors();
     }
 
-    public function testGetErrorById(): void
+    function testGetErrorById(): void
     {
         $engineMock = $this->getMockBuilder(Engine::class)
             ->addMethods(['sendSuccess'])
@@ -56,7 +56,7 @@ class ErrorLogHandlerTest extends TestCase
         $handler->getErrorById('123');
     }
 
-    public function testGetErrorByIdWithInvalidIdExpectException(): void
+    function testGetErrorByIdWithInvalidIdExpectException(): void
     {
         $engineMock = $this->createMock(Engine::class);
         $errorTableMock = $this->createMock(ErrorLogTable::class);

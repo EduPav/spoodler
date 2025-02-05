@@ -23,7 +23,7 @@ class PDOHandlerTest extends TestCase
         $this->pdoHandler = new PDOHandler($this->errorTableMock);
     }
 
-    public function testWriteCreatesCorrectData(): void
+    function testWriteCreatesCorrectData(): void
     {
         // Set up a LogRecord to simulate a log entry
         $logRecord = new LogRecord(
@@ -55,7 +55,7 @@ class PDOHandlerTest extends TestCase
         $this->pdoHandler->handle($logRecord);
     }
 
-    public function testWriteHandlesMissingContextKeys(): void
+    function testWriteHandlesMissingContextKeys(): void
     {
         // Set up a LogRecord without optional context keys
         $logRecord = new LogRecord(
@@ -84,7 +84,7 @@ class PDOHandlerTest extends TestCase
         $this->pdoHandler->handle($logRecord);
     }
 
-    public function testWriteTruncatesLongMessages(): void
+    function testWriteTruncatesLongMessages(): void
     {
         // Set up a LogRecord with a very long message
         $longMessage = str_repeat('A', 300); // 300 characters

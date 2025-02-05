@@ -9,7 +9,7 @@ use flight\Engine;
 
 class RouterTest extends TestCase
 {
-    public function testBuildRoutesCallsRouterGroupOnce()
+    function testBuildRoutesCallsRouterGroupOnce()
     {
         $flightRouterMock = $this->createMock(FlightRouter::class);
         // Expect the router to group routes under "/api"

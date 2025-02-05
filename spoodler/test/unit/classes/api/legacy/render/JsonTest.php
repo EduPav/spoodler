@@ -9,7 +9,7 @@ use classes\api\Header;
 
 class JsonTest extends TestCase
 {
-    public function testConstructJsonExpectCallHeaderWithJsonContent()
+    function testConstructJsonExpectCallHeaderWithJsonContent()
     {
         $headerMock = $this->createMock(Header::class);
         $headerMock->expects($this->once())
@@ -19,7 +19,7 @@ class JsonTest extends TestCase
         new Json($headerMock);
     }
 
-    public function testRenderSuccessExpectJsonEncodedResponse(): void
+    function testRenderSuccessExpectJsonEncodedResponse(): void
     {
         $headerMock = $this->createMock(Header::class);
         $json = new Json($headerMock);
@@ -34,7 +34,7 @@ class JsonTest extends TestCase
         $this->assertSame($expected, $json->renderSuccess($response));
     }
 
-    public function testRenderErrorExpectJsonEncodedErrorMessage(): void
+    function testRenderErrorExpectJsonEncodedErrorMessage(): void
     {
         $headerMock = $this->createMock(Header::class);
         $json = new Json($headerMock);
@@ -48,7 +48,7 @@ class JsonTest extends TestCase
         $this->assertSame($expected, $json->renderError($response));
     }
 
-    public function testRenderNotFoundExpectJsonEncodedErrorMessage(): void
+    function testRenderNotFoundExpectJsonEncodedErrorMessage(): void
     {
         $headerMock = $this->createMock(Header::class);
         $json = new Json($headerMock);

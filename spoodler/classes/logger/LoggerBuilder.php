@@ -12,7 +12,7 @@ class LoggerBuilder
 {
     private MonologLogger $logger;
 
-    public function __construct()
+    function __construct()
     {
         $this->logger = new MonologLogger('spoodler_logger');
 
@@ -26,7 +26,7 @@ class LoggerBuilder
         ErrorHandler::register($this->logger);
     }
 
-    public function getLogger(): MonologLogger
+    function getLogger(): MonologLogger
     {
         return $this->logger;
     }

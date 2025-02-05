@@ -4,7 +4,7 @@ namespace classes\db;
 
 class ErrorLogTable extends BaseModel
 {
-    public function getTableName(): string
+    function getTableName(): string
     {
         return 'errors';
     }

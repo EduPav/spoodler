@@ -9,7 +9,7 @@ use classes\api\Header;
 
 class TextTest extends TestCase
 {
-    public function testConstructTextExpectCallHeaderWithTextContent()
+    function testConstructTextExpectCallHeaderWithTextContent()
     {
         $headerMock = $this->createMock(Header::class);
         $headerMock->expects($this->once())
@@ -19,7 +19,7 @@ class TextTest extends TestCase
         new Text($headerMock);
     }
 
-    public function testRenderSuccessExpectJoinLines(): void
+    function testRenderSuccessExpectJoinLines(): void
     {
         $headerMock = $this->createMock(Header::class);
         $text = new Text($headerMock);
@@ -29,7 +29,7 @@ class TextTest extends TestCase
         $this->assertSame("Line 1\nLine 2\nLine 3", $text->renderSuccess($response));
     }
 
-    public function testRenderErrorExpectErrorMessage(): void
+    function testRenderErrorExpectErrorMessage(): void
     {
         $headerMock = $this->createMock(Header::class);
         $text = new Text($headerMock);
@@ -38,7 +38,7 @@ class TextTest extends TestCase
         $this->assertSame("Error occurred", $text->renderError($response));
     }
 
-    public function testRenderNotFoundExpectErrorMessage(): void
+    function testRenderNotFoundExpectErrorMessage(): void
     {
         $headerMock = $this->createMock(Header::class);
         $text = new Text($headerMock);

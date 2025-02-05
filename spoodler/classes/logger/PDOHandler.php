@@ -11,7 +11,7 @@ class PDOHandler extends AbstractProcessingHandler
 {
     private $errorTable;
 
-    public function __construct(ErrorLogTable $errorTable)
+    function __construct(ErrorLogTable $errorTable)
     {
         $this->errorTable = $errorTable;
         parent::__construct(Logger::ERROR, true);

@@ -15,7 +15,7 @@ class Header
      * @param string $header
      * @return void
      */
-    public function set(string $header): void
+    function set(string $header): void
     {
         header($header);
     }

@@ -12,7 +12,7 @@ use classes\api\exception\client\BadRequestException;
 
 class LegacyHandlerTest extends TestCase
 {
-    public function testHandleValidIdExpectReportReturned(): void
+    function testHandleValidIdExpectReportReturned(): void
     {
         $exampleErrorReport = [
             'id' => 123,
@@ -38,7 +38,7 @@ class LegacyHandlerTest extends TestCase
         $this->assertSame($exampleErrorReport, $result);
     }
 
-    public function testHandleInvalidIdExpectBadRequestException(): void
+    function testHandleInvalidIdExpectBadRequestException(): void
     {
         $errorLogTableMock = $this->createMock(ErrorLogTable::class);
         $requestMock = $this->createMock(Request::class);
@@ -53,7 +53,7 @@ class LegacyHandlerTest extends TestCase
         $handler->handle($requestMock);
     }
 
-    public function testHandleMissingIdExpectBadRequestException(): void
+    function testHandleMissingIdExpectBadRequestException(): void
     {
 
         $errorLogTableMock = $this->createMock(ErrorLogTable::class);
@@ -69,7 +69,7 @@ class LegacyHandlerTest extends TestCase
         $handler->handle($requestMock);
     }
 
-    public function testHandleNotFoundIdExpectNotFoundException(): void
+    function testHandleNotFoundIdExpectNotFoundException(): void
     {
         $errorLogTableMock = $this->createMock(ErrorLogTable::class);
         $errorLogTableMock->expects($this->once())

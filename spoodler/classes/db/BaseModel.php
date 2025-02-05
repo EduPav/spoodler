@@ -11,20 +11,20 @@ abstract class BaseModel
 {
     protected PDO $db;
 
-    public function __construct()
+    function __construct()
     {
         $this->db = DbConnection::getInstance();
     }
 
     abstract protected function getTableName(): string;
 
-    public function getAll(): array
+    function getAll(): array
     {
         $stmt = $this->db->query("SELECT * FROM " . $this->getTableName());
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById(int $id): ?array
+    function getById(int $id): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM " . $this->getTableName() . " WHERE id = :id");
         $stmt->execute(['id' => $id]);
@@ -32,7 +32,7 @@ abstract class BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: throw new NotFoundException('Element not found for id=' . $id);
     }
 
-    public function create(array $data): int
+    function create(array $data): int
     {
         $columns = array_keys($data);
         $this->assertValidColumns($columns);
@@ -68,7 +68,7 @@ abstract class BaseModel
         }
     }
 
-    public function update(int $id, array $data): bool
+    function update(int $id, array $data): bool
     {
         $columns = array_keys($data);
         $this->assertValidColumns($columns);
@@ -87,7 +87,7 @@ abstract class BaseModel
         return true;
     }
 
-    public function delete(int $id): bool
+    function delete(int $id): bool
     {
         $stmt = $this->db->prepare("DELETE FROM " . $this->getTableName() . " WHERE id = :id");
 
