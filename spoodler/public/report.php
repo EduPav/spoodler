@@ -12,8 +12,8 @@ use classes\report\LegacyHandler;
 use classes\utils\UserInputHandler;
 
 $logger->info("Request to v1 HTTP API received");
-// Set view according to some input parameter? Or endpoint for UI and api for different views?
-$renderer = new Text(new Header()); //$renderer = new Text(new Header());
+$asText = isset($_GET['asText']) && $_GET['asText'] == 'true';
+$renderer = $asText ? new Text(new Header()) : $renderer = new Json(new Header());
 $handler = new LegacyHandler(new ErrorLogTable(), new UserInputHandler());
 $controller = new LegacyController($logger, $renderer, $handler, 200);
 $request = new Request($_GET);
