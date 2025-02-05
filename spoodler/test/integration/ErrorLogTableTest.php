@@ -9,7 +9,7 @@ use classes\db\DbConnection;
 // This test class also helps us test BaseModel, as it was an abstract class.
 class ErrorLogTableTest extends TestCase
 {
-    private ErrorLogTable $errorLogTable;
+    private $errorLogTable;
 
     protected function setUp(): void
     {

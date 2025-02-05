@@ -10,7 +10,7 @@ use Monolog\ErrorHandler;
 
 class LoggerBuilder
 {
-    private MonologLogger $logger;
+    private $logger;
 
     function __construct()
     {

@@ -9,7 +9,7 @@ use classes\utils\UserInputHandler;
 
 class UserInputHandlerTest extends TestCase
 {
-    private UserInputHandler $handler;
+    private $handler;
 
     protected function setUp(): void
     {

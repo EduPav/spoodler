@@ -8,9 +8,9 @@ use flight\Engine;
 
 class ErrorLogHandler
 {
-    private Engine $app;
-    private UserInputHandler $userInputHandler;
-    private ErrorLogTable $errorTable;
+    private $app;
+    private $userInputHandler;
+    private $errorTable;
 
     function __construct(Engine $app, ErrorLogTable $errorTable)
     {
