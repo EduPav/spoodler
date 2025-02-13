@@ -10,7 +10,7 @@ $GLOBALS['config']['db'] = [
         'requiredColumns' => ['description', 'created_at']
     ],
     'users' => [
-        'columns' => ['username'],
-        'requiredColumns' => ['username']
+        'columns' => ['email', 'password'],
+        'requiredColumns' => ['username', 'password']
     ]
 ];
