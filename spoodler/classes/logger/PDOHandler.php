@@ -21,8 +21,8 @@ class PDOHandler extends AbstractProcessingHandler
     {
         $data = [
             'message' => substr($record->context['shortMessage'] ?? "Undetermined", 0, 255), // Limit message to VARCHAR(255)
-            'file' => $record->context['file'] ?? 'Undetermined', // File name (optional in context)
-            'description' => $record->message,
+            'file' => str_replace('/var/www/html/', '', $record->context['file'] ?? 'Undetermined'), // File name (optional in context)
+            'description' => $record->message ?? 'No information',
             'created_at' => $record->datetime
                 ->setTimezone(new \DateTimeZone($GLOBALS['config']["timeZone"])) // Adjusted to Arg time
                 ->format('Y-m-d H:i:s'),
