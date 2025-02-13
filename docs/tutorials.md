@@ -8,7 +8,7 @@
 
 Start docker engine.
 
-Run in root project directory:
+Run in root project directory: (Doesn't reset state from last start of containers)
 `docker-compose --env-file spoodler/.env up -d`
 
 Access a file in spoodler folder:
@@ -29,6 +29,11 @@ Remove with:
 ## Bash inside php container
 
 `docker exec -ti spoodler_php /bin/bash`
+
+## Get container logs
+
+`docker logs -f spoodler_php`
+`docker logs -f spoodler_db`
 
 ## db
 
@@ -56,3 +61,9 @@ all envs are in `$_ENV` and all globals in `$GLOBALS['config']`
 ### Run tests
 
 `docker-compose exec php vendor/bin/phpunit`
+
+<!-- # Most used commands -->
+
+docker-compose --env-file ./spoodler/.env up -d
+docker-compose down && docker-compose --env-file ./spoodler/.env up -d
+docker-compose exec php vendor/bin/phpunit
