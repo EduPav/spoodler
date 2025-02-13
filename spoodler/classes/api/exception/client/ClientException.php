@@ -2,6 +2,7 @@
 
 namespace classes\api\exception\client;
 
-interface ClientException extends \Throwable {
-    
+interface ClientException extends \Throwable
+{
+
 }

@@ -2,6 +2,7 @@
 
 namespace classes\api\exception\server;
 
-interface ServerException extends \Throwable {
-    
+interface ServerException extends \Throwable
+{
+
 }
