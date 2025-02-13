@@ -141,4 +141,41 @@ class UserInputHandlerTest extends TestCase
         $this->expectExceptionMessage("input must be an integer: input='12.3'");
         $this->handler->assertInt($input, 'input');
     }
+
+    function testAssertEmailValid(): void
+    {
+        $input = "test@example.com";
+        $this->handler->assertEmail($input, 'email');
+        $this->addToAssertionCount(1);
+    }
+
+    function testAssertEmailInvalid(): void
+    {
+        $input = "invalid-email";
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessage("email must be a valid email address: email='invalid-email'");
+        $this->handler->assertEmail($input, 'email');
+    }
+
+    function testValidateEmailSuccess(): void
+    {
+        $input = "test@example.com";
+        $result = $this->handler->validate($input, 'email', 'email');
+        $this->assertEquals("test@example.com", $result);
+    }
+
+    function testValidateEmailFailure(): void
+    {
+        $input = "not-an-email";
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessage("email must be a valid email address: email='not-an-email'");
+        $this->handler->validate($input, 'email', 'email');
+    }
+
+    function testValidateString(): void
+    {
+        $input = "hello world";
+        $result = $this->handler->validate($input, 'text', 'string');
+        $this->assertEquals("hello world", $result);
+    }
 }

@@ -31,6 +31,13 @@ class UserInputHandler
         }
     }
 
+    function assertEmail(mixed $input, string $keyName): void
+    {
+        if (filter_var($input, FILTER_VALIDATE_EMAIL) === false) {
+            throw new BadRequestException("$keyName must be a valid email address: $keyName='$input'");
+        }
+    }
+
     /**
      * Validate input against specific rules.
      * Throws BadRequestException if validation fails.
@@ -47,7 +54,11 @@ class UserInputHandler
                 $this->assertInt($input, $keyName);
                 $convertedValue = (int) $input;
                 return $convertedValue;
-
+            case 'string':
+                return $input;
+            case 'email':
+                $this->assertEmail($input, $keyName);
+                return $input;
             default:
                 throw new InternalServerErrorException("Unsupported validation type: $type");
         }
