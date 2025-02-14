@@ -18,9 +18,9 @@ $app->map('sendError', function (string $message, int $statusCode) {
 });
 
 // CORS
-header("Access-Control-Allow-Origin: *"); // Allows any domain (you can specify a specific one)
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Allowed request types
-header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Allowed headers
+Flight::response()->header("Access-Control-Allow-Origin: *"); // Allows any domain (you can specify a specific one)
+Flight::response()->header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Allowed request types
+Flight::response()->header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Allowed headers
 
 // Handle preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
