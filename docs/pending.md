@@ -2,6 +2,10 @@
 
 ## Pending
 
+- Add user model:
+  - JWT
+  - user authentication
+- Add tests for all new user related classes and methods
 - Fix not found page when reaching a weird route through api. It should be structured json.
 - Add pagination? Fill more values in sample db for experiments with UI.
 - Create statistics page.
@@ -20,6 +24,7 @@
 
 ## Done
 
+- Add tls/ssl to nginx config
 - Remove internaltest routing (for 500 page tests)
 - React: Route to internal error when error comes from api.
 - REact: fix when visiting home errors is not bold

@@ -51,6 +51,14 @@ And run:
 
 ---
 
+## Security
+
+### Generate self signed certificate
+
+openssl req -x509 -newkey rsa:4096 -nodes -keyout docker/nginx/ssl/key.pem -out docker/nginx/ssl/cert.pem -days 365 -config "C:\Program Files\Git\usr\ssl\openssl.cnf"
+
+---
+
 ## PHP
 
 ### Globals and secrets
