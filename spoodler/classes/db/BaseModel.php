@@ -32,6 +32,23 @@ abstract class BaseModel
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: throw new NotFoundException('Element not found for id=' . $id);
     }
 
+    // Warning: In case unique field is id, use getById() instead. This will return wrong results.
+    function getByUniqueField(string $field, mixed $value): ?array
+    {
+        $tableName = $this->getTableName();
+
+        // Validate that the provided field is a valid column for this table.
+        if (!in_array($field, $GLOBALS['config']['db']["$tableName"]['columns'])) {
+            throw new InternalServerErrorException("Invalid column: $field for selection in $tableName table");
+        }
+
+        $stmt = $this->db->prepare("SELECT * FROM " . $tableName . " WHERE $field = :value");
+        $stmt->execute(['value' => $value]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: throw new NotFoundException("Element not found for $field = $value");
+    }
+
+
     function create(array $data): int
     {
         $columns = array_keys($data);

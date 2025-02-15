@@ -1,7 +1,8 @@
 <?php
 
 $GLOBALS['config']['api'] = [
-    'baseUrl' => 'http://spoodler:8080/api'
+    'baseUrl' => 'http://spoodler:8080/api',
+    'JWTExpiration' => 600 // token validity in seconds
 ];
 $GLOBALS['config']['timeZone'] = 'America/Argentina/Buenos_Aires';
 $GLOBALS['config']['db'] = [
@@ -11,6 +12,6 @@ $GLOBALS['config']['db'] = [
     ],
     'users' => [
         'columns' => ['email', 'password'],
-        'requiredColumns' => ['username', 'password']
+        'requiredColumns' => ['email', 'password']
     ]
 ];

@@ -1,10 +1,10 @@
 -- Populate the `users` table.
 INSERT INTO users (email, password) VALUES
-('alice.johnson@example.com', 'password123'),
-('bob.smith@example.com', 'password456'),
-('charlie.brown@example.com', 'password789'),
-('diana.prince@example.com', 'passwordabc'),
-('ethan.hunt@example.com', 'passwordxyz');
+('alice.johnson@example.com', '$2a$04$g9X23UcRmKjPN4rk/K7Q9ORaGGOUWFzZgx21UfppjkIZtRuF/zmRO'), -- password123
+('bob.smith@example.com', '$2a$04$amjNgOGd3kA910KuP87pMetBlQcE.mgchT83XshuZKgq6WK0EdzqK'), -- password456
+('charlie.brown@example.com', '$2a$04$g9X23UcRmKjPN4rk/K7Q9ORaGGOUWFzZgx21UfppjkIZtRuF/zmRO'), -- password123
+('diana.prince@example.com', '$2a$04$amjNgOGd3kA910KuP87pMetBlQcE.mgchT83XshuZKgq6WK0EdzqK'), -- password456
+('ethan.hunt@example.com', '$2a$04$amjNgOGd3kA910KuP87pMetBlQcE.mgchT83XshuZKgq6WK0EdzqK'); -- password456
 
 -- Populate the `errors` table. Eventually replace by examples of real local project errors.
 INSERT INTO errors (message, file, description, created_at) VALUES

@@ -18,15 +18,15 @@ class UserTableTest extends TestCase
         $this->expectExceptionMessage("Invalid column: madeUpColumn for create in users table");
         $userTable = new UserTable();
         $userTable->create([
-            "username" => "admin",
-            "madeUpColumn" => "admin@yahoo.com.ar"
+            "email" => "admin@yahoo.com.ar",
+            "madeUpColumn" => "19/08/1999"
         ]);
     }
 
     function testCreateWithoutRequiredColumnExpectInternalServerError(): void
     {
         $this->expectException(InternalServerErrorException::class);
-        $this->expectExceptionMessage("Missing required column: username for create in users table");
+        $this->expectExceptionMessage("Missing required column: email for create in users table");
         $userTable = new UserTable();
         $userTable->create([]);
     }
