@@ -45,7 +45,11 @@ class UserHandler
         $email = $this->userInputHandler->requireSanitizeValidate($data, "email", "email");
         $password = $this->userInputHandler->requireSanitizeValidate($data, "password", "string");
 
-        $user = $this->userTable->getByUniqueField('email', $email);
+        try {
+            $user = $this->userTable->getByUniqueField('email', $email);
+        } catch (NotFoundException $e) {
+            throw new UnauthorizedException('User not found for email=' . $email);
+        }
         $this->assertValidCredentials($user, $password);
         $jwtToken = $this->createAuthToken($user['id']);
         $this->app->sendSuccess(['email' => $user['email'], 'token' => $jwtToken]);
