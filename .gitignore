@@ -2,3 +2,4 @@ spoodler/.env*
 spoodler/vendor
 spoodler/.phpunit.cache
 spoodler/logs
+frontend/node_modules

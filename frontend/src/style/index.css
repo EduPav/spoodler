@@ -1,0 +1,16 @@
+@import "./tableStyles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #d1d5db;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+/* Degraded background */
+.errorBg {
+  background-image: linear-gradient(to bottom, #011832, #1e293b);
+}

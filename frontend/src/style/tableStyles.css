@@ -1,0 +1,36 @@
+table {
+  width: 100%;
+  table-layout: fixed;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th {
+  background-color: #0a192f;
+  color: #d1d5db;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+tr {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #2c3e50;
+}
+
+tr:hover {
+  background-color: rgb(243 244 246);
+}
+
+tr:last-child {
+  border-bottom: none;
+}
+
+td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
