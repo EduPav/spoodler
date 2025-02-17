@@ -22,10 +22,10 @@ const useFetch = (url) => {
                     setNotFoundException(true);
                     setMessage(data.message);
                 }
-                if (response.status == 401) {
+                else if (response.status == 401) {
                     navigate("/login");
                 }
-                if (response.status >= 400) {
+                else if (response.status >= 400) {
                     setInternalException(true);
                 }
             } catch (exception) {

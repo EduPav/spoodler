@@ -12,6 +12,11 @@ export default defineConfig({
       key: readFileSync('./ssl/key.pem'),
       cert: readFileSync('./ssl/cert.pem')
     },
+    hmr: {
+      protocol: 'wss',
+      host: 'spoodler',
+      port: 3443
+    },
     proxy: {
       '/api': {
         target: 'https://nginx:443',

@@ -16,7 +16,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route path="/" element={<MainLayout />}>
     <Route path="/" element={<MainLayout />} errorElement={<><Navbar /><InternalErrorPage /></>}>
-      <Route index element={<Navigate to="/login" replace />} />
+      <Route index element={<Navigate to="/errors" replace />} />
       <Route path="/login" element={<LoginPage />}/>
       <Route path="/register" element={<RegisterPage />}/>
       <Route path="/errors" element={<ErrorsPage />}/>
