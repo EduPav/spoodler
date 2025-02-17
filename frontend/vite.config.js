@@ -6,15 +6,15 @@ import { readFileSync } from 'fs'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: 'spoodler', // Allow access via "spoodler"
-    port: 3000,
+    host: '0.0.0.0',
+    port: 3443,
     https: {
-      key: readFileSync('./path/to/your-key.pem'),
-      cert: readFileSync('./path/to/your-cert.pem')
+      key: readFileSync('./ssl/key.pem'),
+      cert: readFileSync('./ssl/cert.pem')
     },
     proxy: {
       '/api': {
-        target: 'https://localhost:8443',
+        target: 'https://nginx:443',
         changeOrigin: true,
         secure: false // To enable self signed certificates
       }

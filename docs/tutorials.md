@@ -30,6 +30,11 @@ Remove with:
 
 `docker exec -ti spoodler_php /bin/bash`
 
+## Bash in an exited container
+
+`docker-compose run --rm react /bin/bash`
+`docker-compose run --rm react sh`
+
 ## Get container logs
 
 `docker logs -f spoodler_php`
@@ -69,6 +74,16 @@ all envs are in `$_ENV` and all globals in `$GLOBALS['config']`
 ### Run tests
 
 `docker-compose exec php vendor/bin/phpunit`
+
+---
+
+## Frontend
+
+### Add new package
+
+```sh
+docker-compose exec react npm install {packageName} # Pendiente verificar este comando.
+```
 
 <!-- # Most used commands -->
 

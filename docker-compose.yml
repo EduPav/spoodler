@@ -1,4 +1,15 @@
 services:
+  react:
+    build:
+      context: .
+      dockerfile: docker/react/Dockerfile
+    container_name: spoodler_frontend
+    volumes:
+      - ./frontend:/app/spoodler-frontend
+    ports:
+      - "3443:3443"
+    networks:
+      - spoodler_network
   nginx:
     image: nginx:latest
     container_name: spoodler_nginx
