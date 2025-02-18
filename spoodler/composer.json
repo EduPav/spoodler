@@ -4,7 +4,10 @@
         "vlucas/phpdotenv": "^5.5",
         "monolog/monolog": "^3.8",
         "flightphp/core": "^3.13",
-        "firebase/php-jwt": "^6.11"
+        "firebase/php-jwt": "^6.11",
+        "openai-php/client": "^0.10.3",
+        "symfony/http-client": "^7.2",
+        "nyholm/psr7": "^1.8"
     },
     "autoload": {
         "psr-4": {
@@ -18,5 +21,10 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "^11.5"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
