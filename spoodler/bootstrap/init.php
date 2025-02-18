@@ -20,4 +20,8 @@ ini_set('log_errors', 1);
 error_reporting(E_ALL);
 $logger = (new LoggerBuilder())->getLogger();
 
-
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}

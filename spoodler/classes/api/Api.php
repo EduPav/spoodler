@@ -2,6 +2,8 @@
 
 namespace classes\api;
 
+use classes\api\middleware\AuthMiddleware;
+use classes\api\Router;
 use classes\api\exception\client\ClientException;
 use classes\api\exception\server\ServerException;
 use flight\Engine;
@@ -23,9 +25,23 @@ class Api
         $this->response = $this->app->response();
     }
 
+    private function init(): void
+    {
+        // Authentication and Routing
+        $authMiddleware = new AuthMiddleware($_ENV['JWT_SECRET'], $this->app, $this->logger);
+        $router = new Router($authMiddleware, $this->logger);
+        $router->buildRoutes($this->app);
+
+        // CORS
+        $this->app->response()->header("Access-Control-Allow-Origin: *"); // Allows any domain (you can specify a specific one)
+        $this->app->response()->header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Allowed request types
+        $this->app->response()->header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Allowed headers
+    }
+
     function run(): void
     {
         try {
+            $this->init();
             $this->logger->info(
                 "Request to REST API received",
                 [
