@@ -1,5 +1,7 @@
 <?php
 
+namespace classesapi\api\handler;
+
 use PHPUnit\Framework\TestCase;
 use classes\api\handler\UserHandler;
 use classes\db\UserTable;

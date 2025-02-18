@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit\classes\api\legacy\render;
+namespace classes\api\legacy\render;
 
 use PHPUnit\Framework\TestCase;
 use classes\api\legacy\render\Text;

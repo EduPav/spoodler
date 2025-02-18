@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\api;
+namespace classes\api;
 
 use classes\api\exception\client\BadRequestException;
 use classes\api\exception\server\InternalServerErrorException;
