@@ -1,6 +1,6 @@
 <?php
 
-namespace classesapi\api\handler;
+namespace classes\api\handler;
 
 use PHPUnit\Framework\TestCase;
 use classes\api\handler\UserHandler;
@@ -47,12 +47,12 @@ class UserHandlerTest extends TestCase
 
     private function mockEngineWithRequest(array $data)
     {
-        $dataStub = $this->getMockBuilder(stdClass::class)
+        $dataStub = $this->getMockBuilder(\stdClass::class)
             ->addMethods(['getData'])
             ->getMock();
         $dataStub->method('getData')->willReturn($data);
 
-        $requestStub = new stdClass();
+        $requestStub = new \stdClass();
         $requestStub->data = $dataStub;
 
         $engineMock = $this->getMockBuilder(Engine::class)
