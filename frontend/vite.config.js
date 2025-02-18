@@ -23,6 +23,10 @@ export default defineConfig({
         changeOrigin: true,
         secure: false // To enable self signed certificates
       }
+    },
+    watch: {
+      usePolling: true,
+      interval: 100,
     }
   }
 })
