@@ -11,6 +11,14 @@ const useFetch = (url) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!url) {
+            setLoading(false);
+            return;
+        }
+        // Resets vars on new fetch
+        setInternalException(false);
+        setNotFoundException(false);
+        setLoading(true);
         const fetchErrors = async () => {
             try {
                 const token = localStorage.getItem("token");

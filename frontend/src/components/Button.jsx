@@ -4,6 +4,7 @@ const variants = {
   primary: "bg-highlight hover:bg-blue-700 text-white",
   danger: "bg-error hover:bg-red-700 text-white",
   outline: "border border-gray-600 text-gray-600 hover:bg-gray-100",
+  newFeature: "bg-orange-600 hover:bg-orange-700 text-white"
 };
 
 const Button = ({ children, variant = "primary", onClick, className = "", disabled = false, ...props }) => {
