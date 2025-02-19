@@ -10,6 +10,8 @@ Start docker engine.
 
 Run in root project directory: (Doesn't reset state from last start of containers)
 `docker-compose --env-file spoodler/.env up -d`
+To restart server without losing state (for some softer updates):
+`docker-compose stop && docker-compose --env-file ./spoodler/.env up -d`
 
 Access a file in spoodler folder:
 http://spoodler:8080/test.php
@@ -88,5 +90,5 @@ docker-compose exec react npm install {packageName} # Pendiente verificar este c
 <!-- # Most used commands -->
 
 docker-compose --env-file ./spoodler/.env up -d
-docker-compose down && docker-compose --env-file ./spoodler/.env up -d
+docker-compose stop && docker-compose --env-file ./spoodler/.env up -d
 docker-compose exec php vendor/bin/phpunit
