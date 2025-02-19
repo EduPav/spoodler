@@ -1,0 +1,18 @@
+<?php
+
+namespace classes\advice;
+
+class AdviceService
+{
+    private AdviceProviderInterface $provider;
+
+    function __construct(AdviceProviderInterface $provider)
+    {
+        $this->provider = $provider;
+    }
+
+    function getAdviceForError(array $errorReport): string
+    {
+        return $this->provider->getAdvice($errorReport);
+    }
+}

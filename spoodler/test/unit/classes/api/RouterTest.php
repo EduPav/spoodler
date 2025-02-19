@@ -3,6 +3,7 @@
 namespace classes\api;
 
 use classes\api\middleware\AuthMiddleware;
+use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use classes\api\Router;
 use flight\net\Router as FlightRouter;
@@ -29,7 +30,8 @@ class RouterTest extends TestCase
             ->willReturn($flightRouterMock);
 
         $authMiddlewareMock = $this->createMock(AuthMiddleware::class);
-        $routerInstance = new Router($authMiddlewareMock);
+        $loggerMock = $this->createMock(Logger::class);
+        $routerInstance = new Router($authMiddlewareMock, $loggerMock);
         $routerInstance->buildRoutes($engineMock);
     }
 }

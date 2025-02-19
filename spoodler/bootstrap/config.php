@@ -1,10 +1,8 @@
 <?php
 
-$GLOBALS['config']['api'] = [
-    'baseUrl' => 'http://spoodler:8080/api',
-    'JWTExpiration' => 600 // token validity in seconds
-];
+$GLOBALS['config']['api']['JWTExpiration'] = 600; // token validity in seconds
 $GLOBALS['config']['timeZone'] = 'America/Argentina/Buenos_Aires';
+
 $GLOBALS['config']['db'] = [
     'errors' => [
         'columns' => ['message', 'file', 'description', 'created_at'],
@@ -15,3 +13,7 @@ $GLOBALS['config']['db'] = [
         'requiredColumns' => ['email', 'password']
     ]
 ];
+
+$GLOBALS['config']['advice']['enabled'] = false;
+$GLOBALS['config']['advice']['model'] = "gpt-4o-mini";
+$GLOBALS['config']['advice']['charLimit'] = 500;

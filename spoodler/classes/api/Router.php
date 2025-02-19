@@ -8,23 +8,27 @@ use classes\api\middleware\AuthMiddleware;
 use classes\db\ErrorLogTable;
 use classes\db\UserTable;
 use flight\Engine;
+use Monolog\Logger;
 
 class Router
 {
     private $authMiddleware;
+    private $logger;
 
-    function __construct(AuthMiddleware $authMiddleware)
+    function __construct(AuthMiddleware $authMiddleware, Logger $logger)
     {
         $this->authMiddleware = $authMiddleware;
+        $this->logger = $logger;
     }
 
     function buildRoutes(Engine $app): void
     {
         $router = $app->router();
         $router->group('/api', function () use ($router, $app) {
-            $errorHandler = new ErrorLogHandler($app, new ErrorLogTable());
+            $errorHandler = new ErrorLogHandler($app, new ErrorLogTable(), $this->logger);
             $router->get('/errors', [$errorHandler, 'getAllErrors']);
             $router->get('/errors/@id', [$errorHandler, 'getErrorById']);
+            $router->get('/errors/@id/advice', [$errorHandler, 'getErrorAdvice']);
             $userHandler = new UserHandler($app, new UserTable());
             $router->get('/users/getme', [$userHandler, 'getMe']);
             $router->post('/users/login', [$userHandler, 'loginUser']);
