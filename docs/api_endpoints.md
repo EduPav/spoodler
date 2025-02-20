@@ -12,6 +12,14 @@ https://spoodler:8443
 
 ---
 
+## Security
+
+This API uses **self-signed certificates** for HTTPS connections to ensure secure communication. Since the certificate is self-signed, clients may need to manually accept the certificate when making requests.
+
+Make sure to configure your HTTP client (e.g., Postman, cURL, or browser) to trust the self-signed certificate to avoid SSL/TLS errors.
+
+---
+
 ## Response Format
 
 All responses follow this structure:
