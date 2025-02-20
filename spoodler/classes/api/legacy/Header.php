@@ -1,6 +1,6 @@
 <?php
 
-namespace classes\api;
+namespace classes\api\legacy;
 
 class Header
 {

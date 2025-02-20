@@ -13,7 +13,6 @@ use Throwable;
 class Api
 {
     private $logger;
-    private $request;
     private $response;
     private $app;
 
@@ -21,8 +20,6 @@ class Api
     {
         $this->app = $app;
         $this->logger = $logger;
-        $this->request = $this->app->request();
-        $this->response = $this->app->response();
     }
 
     private function init(): void
@@ -42,11 +39,12 @@ class Api
     {
         try {
             $this->init();
+            $request = $this->app->request();
             $this->logger->info(
                 "Request to REST API received",
                 [
-                    // "http_method" => $this->request->method,
-                    "http_uri" => $this->request->getVar('REQUEST_URI')
+                    "http_method" => $request->method,
+                    "http_uri" => $request->getVar('REQUEST_URI')
                 ]
             );
             $this->app->start();
@@ -57,7 +55,7 @@ class Api
         } catch (Throwable $e) {
             $this->handleInternalError($e, 500);
         }
-        $this->logger->info("Request handled", ["http_status_code" => $this->response->status()]);
+        $this->logger->info("Request handled", ["http_status_code" => $this->app->response()->status()]);
     }
 
     private function handleInternalError(Throwable $e, int $statusCode): void

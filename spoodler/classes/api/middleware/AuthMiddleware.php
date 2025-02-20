@@ -43,7 +43,7 @@ class AuthMiddleware
 
         $token = $matches[1];
         try {
-            $this->logger->info("Validating token", ["token" => $token]);
+            $this->logger->debug("Validating token", ["token" => $token]);
             $decoded = (array) JWT::decode($token, new Key($this->secretKey, 'HS256'));
             $this->app->set('userId', $decoded['id']);
         } catch (\Exception $e) {

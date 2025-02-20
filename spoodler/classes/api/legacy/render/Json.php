@@ -4,7 +4,7 @@ namespace classes\api\legacy\render;
 
 use classes\api\legacy\ApiResponse;
 use classes\api\legacy\render\Renderable;
-use classes\api\Header;
+use classes\api\legacy\Header;
 
 class Json implements Renderable
 {

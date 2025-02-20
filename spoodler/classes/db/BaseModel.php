@@ -4,12 +4,11 @@ namespace classes\db;
 
 use classes\api\exception\server\InternalServerErrorException;
 use PDO;
-use classes\api\exception\client\NotFoundException;
 
 // As this is an abstract class, most of its methods are tested in ErrorLogTableTest.php
 abstract class BaseModel
 {
-    protected PDO $db;
+    protected $db;
 
     function __construct()
     {

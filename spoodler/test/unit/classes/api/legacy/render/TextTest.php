@@ -5,7 +5,7 @@ namespace classes\api\legacy\render;
 use PHPUnit\Framework\TestCase;
 use classes\api\legacy\render\Text;
 use classes\api\legacy\ApiResponse;
-use classes\api\Header;
+use classes\api\legacy\Header;
 
 class TextTest extends TestCase
 {

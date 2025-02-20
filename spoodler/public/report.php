@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../bootstrap/init.php';
 
-use classes\api\Header;
+use classes\api\legacy\Header;
 use classes\api\legacy\control\LegacyController;
 use classes\api\legacy\render\Json;
 use classes\api\legacy\render\Text;

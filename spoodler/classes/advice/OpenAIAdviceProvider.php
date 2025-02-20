@@ -10,7 +10,7 @@ class OpenAIAdviceProvider implements AdviceProviderInterface
     private $client;
     private $logger;
 
-function __construct(Logger $logger)
+    function __construct(Logger $logger)
     {
         if ($GLOBALS['config']['advice']['enabled'] !== true) {
             throw new InternalServerErrorException('AI Advices are disabled.');

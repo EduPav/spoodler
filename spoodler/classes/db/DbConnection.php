@@ -17,7 +17,7 @@ class DbConnection
     {
     } # To prevent cloning
 
-    public static function getInstance(): PDO
+    static function getInstance(): PDO
     {
         if (self::$instance === null) {
             try {
