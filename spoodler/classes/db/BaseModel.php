@@ -29,7 +29,7 @@ abstract class BaseModel
         $stmt = $this->db->prepare("SELECT * FROM " . $this->getTableName() . " WHERE id = :id");
         $stmt->execute(['id' => $id]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: throw new NotFoundException('Element not found for id=' . $id);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
     // Warning: In case unique field is id, use getById() instead. This will return wrong results.
@@ -45,7 +45,7 @@ abstract class BaseModel
         $stmt = $this->db->prepare("SELECT * FROM " . $tableName . " WHERE $field = :value");
         $stmt->execute(['value' => $value]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: throw new NotFoundException("Element not found for $field = $value");
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
 

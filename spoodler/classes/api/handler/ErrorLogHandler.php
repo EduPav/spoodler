@@ -3,6 +3,7 @@
 namespace classes\api\handler;
 
 use classes\advice\OpenAIAdviceProvider;
+use classes\api\exception\client\NotFoundException;
 use classes\utils\UserInputHandler;
 use classes\db\ErrorLogTable;
 use flight\Engine;
@@ -34,13 +35,22 @@ class ErrorLogHandler
     {
         $this->userInputHandler->assertInt($id, "id");
         $error = $this->errorTable->getById($id);
+        $this->assertErrorFetched($error);
         $this->app->sendSuccess($error);
+    }
+
+    private function assertErrorFetched(mixed $error)
+    {
+        if (empty($error)) {
+            throw new NotFoundException('Error not found');
+        }
     }
 
     function getErrorAdvice(mixed $id): void
     {
         $this->userInputHandler->assertInt($id, "id");
         $error = $this->errorTable->getById($id);
+        $this->assertErrorFetched($error);
         $adviceService = new AdviceService(new OpenAIAdviceProvider($this->logger));
         $advice = $adviceService->getAdviceForError($error); // As this might start returning an array, line below could need to change
         $this->app->sendSuccess(["advice" => $advice]);

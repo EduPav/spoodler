@@ -2,29 +2,48 @@
 
 ## Pending
 
-- Create statistics page.
+- Make sure to be using spoodler network inside the projects. php to dbs. nginx to php. etc
+- Improve ai endpoint
+  - Add structure to the prompt.
+  - Check md rendering properly (I think triple '#' renders as **bold**).
 - Bugs:
   - Method not allowed api error is not json standard.
   - Fix not found page when reaching a weird route through api. It should be structured json.
   - Tengo seteado not null a description, pero con throw de Internals en ErrorLogHandler me salieron sin description.
-  - Couldn't add ssl cert to default authorized for windows. Had to approve in browser but throws it says "page is insecure"
-  - Db connection error is not handled. Fatal error.
-  - REACT: when visiting invalid id in errors/id page it shows empty page, not an error.
+  - Db connection error is not handled. Fatal error. Handle it.
+  - Why are some errors created without file, but they are logged and have it in their description? (It might be Uncaught exceptions)
 - Add pagination? Fill more values in sample db for experiments with UI.
-- REACT: Create login page
-- REACT: Add authentication to backend.
+- REACT:
+  - Log out option?
+  - Setting bad login to delete token?
 - test postman.json import
+- run postman tests again and update expectations.
 
 ---
 
 ## Professor requirements:
 
-- stats endpoint for graphical and statistical analysis.
+- Frontend que permita navegar en ellos, gestionarlos y ofrecer un tablero con gráficas, estadísticas y eventualmente aplicación de IA para categorizarlos, analizar tendencias, etc.
+- Document api endpoints.
 
 ---
 
 ## Done
 
+- Create Ai endpoint that reads error information.
+  - Solve double requests before adding api key. React is gonna devour my tokens.
+  - Button of AI help me!
+  - Classes to communicate with openai api.
+  - Set Budget limit of 5 USD.
+  - White background in error page to open like a chat? Render acknowledging new text.
+  - Add unit tests for all new methods and classes.
+- REACT bug fixed: when visiting invalid id in errors/id page it shows empty page, not an error.
+- Move REACT to docker and main project.
+- REACT:
+  - Add authentication to backend.
+  - Add ssl certs.
+  - Create login page
+  - Create register page
 - Postman:
   - Add tests for all endpoints.
   - Save them in tests/api (tested export)
@@ -78,3 +97,11 @@
 - Create a global configs file
 - You can access spoodler in spoodler:8080
 - Set up with docker-compose: php, nginx, mysql working containers.
+
+## Discarded
+
+- Create statistics page.
+  - ML features. Analysis of frequency:
+  - Weekday
+  - Weekend/holiday?
+  - Instance?(anomaly could be same frequency of errors, but an instance reported most of them).

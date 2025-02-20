@@ -29,7 +29,15 @@ class UserHandler
         $userId = $this->app->get('userId');
         $this->assertValidUserId($userId);
         $user = $this->userTable->getById($userId);
+        $this->assertUserFetched($user);
         $this->app->sendSuccess(['email' => $user['email']]);
+    }
+
+    private function assertUserFetched(mixed $user): void
+    {
+        if (empty($user)) {
+            throw new UnauthorizedException('User not found');
+        }
     }
 
     private function assertValidUserId(?int $userId): void
@@ -45,11 +53,7 @@ class UserHandler
         $email = $this->userInputHandler->requireSanitizeValidate($data, "email", "email");
         $password = $this->userInputHandler->requireSanitizeValidate($data, "password", "string");
 
-        try {
-            $user = $this->userTable->getByUniqueField('email', $email);
-        } catch (NotFoundException $e) {
-            throw new UnauthorizedException('User not found for email=' . $email);
-        }
+        $user = $this->userTable->getByUniqueField('email', $email);
         $this->assertValidCredentials($user, $password);
         $jwtToken = $this->createAuthToken($user['id']);
         $this->app->sendSuccess(['email' => $user['email'], 'token' => $jwtToken]);

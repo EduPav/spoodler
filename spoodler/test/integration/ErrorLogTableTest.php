@@ -113,8 +113,7 @@ class ErrorLogTableTest extends TestCase
     {
         $this->createErrorLog(1);
 
-        $this->expectException(NotFoundException::class);
-        $this->errorLogTable->getById(2);
+        $this->assertNull($this->errorLogTable->getById(2));
     }
 
     function testGetTableNameExpectTableName()
@@ -166,7 +165,7 @@ class ErrorLogTableTest extends TestCase
         ]);
     }
 
-    function testDeleteErrorLogExpectSuccess(): void
+    function testDeleteErrorLogExpectDeletionCompleted(): void
     {
         // Create a log entry
         $id = $this->createErrorLog(1);
@@ -177,8 +176,7 @@ class ErrorLogTableTest extends TestCase
         $this->assertTrue($deleted);
 
         // Verify the deletion
-        $this->expectException(NotFoundException::class);
-        $this->errorLogTable->getById($id);
+        $this->assertNull($this->errorLogTable->getById($id));
     }
 
     function testDeleteErrorLogExpectInternalServerError(): void
