@@ -3,3 +3,5 @@ spoodler/vendor
 spoodler/.phpunit.cache
 spoodler/logs
 frontend/node_modules
+docs/pending
+docs/tutorials
