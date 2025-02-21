@@ -17,7 +17,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www/html
 
-# Expose the PHP-FPM port
+# Documentation about which port will be used. Not actually exposing anything
 EXPOSE 9000
 
 # Start PHP-FPM
