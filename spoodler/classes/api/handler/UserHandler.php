@@ -91,11 +91,8 @@ class UserHandler
 
     private function assertEmailNotRegistered(string $email): void
     {
-        try {
-            $this->userTable->getByUniqueField('email', $email);
+        if ($this->userTable->getByUniqueField('email', $email)) {
             throw new BadRequestException('Email already registered');
-        } catch (NotFoundException $e) {
-            return;
         }
     }
 

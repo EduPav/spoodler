@@ -8,7 +8,6 @@ use classes\db\UserTable;
 use flight\Engine;
 use classes\api\exception\client\UnauthorizedException;
 use classes\api\exception\client\BadRequestException;
-use classes\api\exception\client\NotFoundException;
 use classes\api\exception\server\InternalServerErrorException;
 
 class UserHandlerTest extends TestCase
@@ -191,7 +190,7 @@ class UserHandlerTest extends TestCase
         // Simulate email not registered.
         $userTable->method('getByUniqueField')
             ->with('email', $data['email'])
-            ->will($this->throwException(new NotFoundException()));
+            ->willReturn(null);
         // Simulate failure to create user.
         $userTable->method('create')->willReturn(0);
 
@@ -210,7 +209,7 @@ class UserHandlerTest extends TestCase
         // Simulate email not registered.
         $userTable->method('getByUniqueField')
             ->with('email', $data['email'])
-            ->will($this->throwException(new NotFoundException()));
+            ->willReturn(null);
         // Simulate successful user creation.
         $userTable->method('create')->willReturn(10);
 
