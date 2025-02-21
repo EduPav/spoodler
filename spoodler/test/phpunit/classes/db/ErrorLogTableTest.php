@@ -1,6 +1,7 @@
 <?php
 
-use classes\api\exception\client\NotFoundException;
+namespace classes\db;
+
 use classes\api\exception\server\InternalServerErrorException;
 use PHPUnit\Framework\TestCase;
 use classes\db\ErrorLogTable;

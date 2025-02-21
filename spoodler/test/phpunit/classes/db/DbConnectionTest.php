@@ -1,7 +1,10 @@
 <?php
 
+namespace classes\db;
+
 use PHPUnit\Framework\TestCase;
 use classes\db\DbConnection;
+use PDO;
 
 class DbConnectionTest extends TestCase
 {

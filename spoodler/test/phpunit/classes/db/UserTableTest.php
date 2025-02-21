@@ -1,5 +1,7 @@
 <?php
 
+namespace classes\db;
+
 use classes\api\exception\server\InternalServerErrorException;
 use classes\db\UserTable;
 use PHPUnit\Framework\TestCase;
