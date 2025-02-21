@@ -8,7 +8,6 @@ function Navbar() {
   const routeTitles = {
     "/": "Error Reports",      // Home is the Errors page
     "/errors": "Error Reports",
-    "/statistics": "Statistics",
   };
   const currentPageTitle = routeTitles[location.pathname] || "";
 
@@ -34,11 +33,6 @@ function Navbar() {
           <li>
             <NavLink to="errors" className={linkClasses}>
               Errors
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="statistics" className={linkClasses}>
-              Statistics
             </NavLink>
           </li>
         </ul>

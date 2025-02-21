@@ -1,6 +1,5 @@
 // import React from "react";
 import ErrorsPage from "./pages/ErrorsPage";
-import StatisticsPage from "./pages/StatisticsPage";
 import ErrorPage from "./pages/ErrorPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import InternalErrorPage from "./pages/InternalErrorPage";
@@ -21,7 +20,6 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterPage />}/>
       <Route path="/errors" element={<ErrorsPage />}/>
       <Route path="/errors/:id" element={<ErrorPage />}/>
-      <Route path="/statistics" element={<StatisticsPage />} />
       <Route path="*" element={<NotFoundPage message="Oops! We couldn't find that page." />} />
     </Route>
   )
