@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0906f98c-da54-41e4-941f-a3fbc1ffec60",
+		"_postman_id": "d065c7b8-d01b-4220-87a8-1102bee20166",
 		"name": "Spoodler Test Suite",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "42370690"
@@ -9,93 +9,6 @@
 		{
 			"name": "RESTful API",
 			"item": [
-				{
-					"name": "invalid endpoint",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 404\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Message is correct\", function () {\r",
-									"    let jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.message).to.eql(\"The page you have requested could not be found\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Data is empty\", function () {\r",
-									"    let jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data).to.eql([]);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/invalid",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"invalid"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "invalid endpoint method",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 405\", function () {\r",
-									"    pm.response.to.have.status(405);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Message is correct\", function () {\r",
-									"    let jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.message).to.eql(\"Method Not Allowed\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Data is empty\", function () {\r",
-									"    let jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data).to.eql([]);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/users/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "endpoint w/o auth header",
 					"event": [
@@ -587,13 +500,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 404\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Message is correct\", function () {\r",
 									"    let jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.message).to.eql(\"Element not found for email = unexistantUser@gmail.com\");\r",
+									"    pm.expect(jsonData.message).to.eql(\"Invalid email or password\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Data is empty\", function () {\r",
@@ -972,6 +885,113 @@
 									"key": "id",
 									"value": "1a"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Page not found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data is empty\", function () {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.eql([]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/invalid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"invalid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid endpoint method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Method not allowed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data is empty\", function () {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.eql([]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwtToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
 							]
 						}
 					},

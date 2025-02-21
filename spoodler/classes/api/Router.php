@@ -33,6 +33,13 @@ class Router
             $router->get('/users/getme', [$userHandler, 'getMe']);
             $router->post('/users/login', [$userHandler, 'loginUser']);
             $router->post('/users/register', [$userHandler, 'registerUser']);
+            // Handle undefined routes and methods
+            $router->map('/(errors/.+|users/.+)', function () use ($app) {
+                $app->sendError('Method not allowed', 405);
+            });
+            $router->map('/*', function () use ($app) {
+                $app->sendError('Page not found', 404);
+            });
         }, [$this->authMiddleware]);
     }
 }
