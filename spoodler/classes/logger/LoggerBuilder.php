@@ -20,8 +20,11 @@ class LoggerBuilder
         $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../logs/info.log', MonologLogger::INFO));
 
         // Add the custom PDOHandler for error logging
-        $this->logger->pushHandler(new PDOHandler(new ErrorLogTable()));
-
+        try {
+            $this->logger->pushHandler(new PDOHandler(new ErrorLogTable()));
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+        }
         // Register this logger as the global error and exception handler
         ErrorHandler::register($this->logger);
     }
