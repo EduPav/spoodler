@@ -87,6 +87,8 @@ The `spoodler` folder contains the backend logic for Spoodler. Here's a high-lev
 
 #### `classes/`
 
+![alt text](img/Backend.png)
+
 Organized PHP classes for different functionalities:
 
 - **advice/**
