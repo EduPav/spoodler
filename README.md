@@ -3,7 +3,8 @@
 ## Quickstart
 
 - Install [Docker](https://www.docker.com/)
-- Set secrets in `.env`. E.g:
+- Start docker engine.
+- Create an `spoodler/.env` file for secrets. E.g:
 
 ```
 # DB Secrets
@@ -20,8 +21,21 @@ JWT_SECRET = K7rZtNfp24XRUXDG
 OPENAI_API_KEY = Your_key
 ```
 
-- Run `docker-compose --env-file spoodler/.env up -d`
-- Map spoodler to localhost in hosts file (Windows).
+- Run containers:
+```sh
+docker-compose --env-file spoodler/.env up -d
+```
+- Install dependencies:
+```sh
+docker-compose exec php composer install
+docker-compose run react npm install
+```
+- Recreate containers:
+```sh
+docker-compose --env-file spoodler/.env down
+docker-compose --env-file spoodler/.env up -d
+```
+- Map spoodler to `127.0.0.1` in hosts file (Windows).
 
 Then you can hit the api with a POST to `https://spoodler:8443/api/users/login`
 
