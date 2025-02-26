@@ -40,7 +40,7 @@ class LegacyHandlerTest extends TestCase
 
     function testHandleInvalidIdExpectBadRequestException(): void
     {
-        $errorLogTableMock = $this->createMock(ErrorLogTable::class);
+        $errorLogTableDummy = $this->createMock(ErrorLogTable::class);
         $requestMock = $this->createMock(Request::class);
         $requestMock->expects($this->once())
             ->method('getQueryParameters')
@@ -49,14 +49,14 @@ class LegacyHandlerTest extends TestCase
         $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage('id must be an int');
 
-        $handler = new LegacyHandler($errorLogTableMock, new UserInputHandler());
+        $handler = new LegacyHandler($errorLogTableDummy, new UserInputHandler());
         $handler->handle($requestMock);
     }
 
     function testHandleMissingIdExpectBadRequestException(): void
     {
 
-        $errorLogTableMock = $this->createMock(ErrorLogTable::class);
+        $errorLogTableDummy = $this->createMock(ErrorLogTable::class);
         $requestMock = $this->createMock(Request::class);
         $requestMock->expects($this->once())
             ->method('getQueryParameters')
@@ -65,7 +65,7 @@ class LegacyHandlerTest extends TestCase
         $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage("Parameter 'id' is required");
 
-        $handler = new LegacyHandler($errorLogTableMock, new UserInputHandler());
+        $handler = new LegacyHandler($errorLogTableDummy, new UserInputHandler());
         $handler->handle($requestMock);
     }
 

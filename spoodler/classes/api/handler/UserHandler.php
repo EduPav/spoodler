@@ -3,7 +3,6 @@
 namespace classes\api\handler;
 
 use classes\api\exception\client\BadRequestException;
-use classes\api\exception\client\NotFoundException;
 use classes\api\exception\client\UnauthorizedException;
 use classes\api\exception\server\InternalServerErrorException;
 use classes\utils\UserInputHandler;

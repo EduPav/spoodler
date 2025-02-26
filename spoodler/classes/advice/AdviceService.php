@@ -4,7 +4,7 @@ namespace classes\advice;
 
 class AdviceService
 {
-    private AdviceProviderInterface $provider;
+    private $provider;
 
     function __construct(AdviceProviderInterface $provider)
     {
