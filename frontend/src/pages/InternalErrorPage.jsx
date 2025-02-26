@@ -5,7 +5,6 @@ const InternalErrorPage = () => {
   return (
     <div
       className="flex flex-col items-center justify-center errorBg overflow-hidden"
-      style={{ height: "calc(100vh - 70px)" }}
     >
       {/* Number */}
       <h1 className="text-6xl sm:text-8xl md:text-9xl font-bold text-error">
