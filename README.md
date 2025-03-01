@@ -21,20 +21,34 @@ JWT_SECRET = K7rZtNfp24XRUXDG
 OPENAI_API_KEY = Your_key
 ```
 
+- Create your own self-signed certificates for https:
+
+```sh
+openssl req -x509 -newkey rsa:4096 -nodes -keyout docker/nginx/ssl/key.pem -out docker/nginx/ssl/cert.pem -days 365 -config "C:\Program Files\Git\usr\ssl\openssl.cnf"
+
+openssl req -x509 -newkey rsa:4096 -nodes -keyout frontend/ssl/key.pem -out frontend/ssl/cert.pem -days 365 -config "C:\Program Files\Git\usr\ssl\openssl.cnf"
+```
+
 - Run containers:
+
 ```sh
 docker-compose --env-file spoodler/.env up -d
 ```
+
 - Install dependencies:
+
 ```sh
 docker-compose exec php composer install
 docker-compose run react npm install
 ```
+
 - Recreate containers:
+
 ```sh
 docker-compose --env-file spoodler/.env down
 docker-compose --env-file spoodler/.env up -d
 ```
+
 - Map spoodler to `127.0.0.1` in hosts file (Windows).
 
 Then you can hit the api with a POST to `https://spoodler:8443/api/users/login`
