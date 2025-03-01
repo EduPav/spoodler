@@ -21,7 +21,7 @@ const useFetch = (url) => {
         setLoading(true);
         const fetchErrors = async () => {
             try {
-                const token = localStorage.getItem("token");
+                const token = sessionStorage.getItem("token");
                 const headers = token ? { Authorization: `Bearer ${token}` } : {};
                 const response = await fetch(url, { headers: headers });
                 const data = await response.json();

@@ -29,7 +29,7 @@ const LoginPage = () => {
                 return;
             }
             const token = (await response.json()).data.token;
-            localStorage.setItem("token", token);
+            sessionStorage.setItem("token", token);
             navigate("/errors");
         } catch {
             setError("An unexpected error occurred.");
