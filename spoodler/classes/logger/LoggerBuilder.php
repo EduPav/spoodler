@@ -17,7 +17,8 @@ class LoggerBuilder
         $this->logger = new MonologLogger('spoodler_logger');
 
         // Add a file handler for general logging
-        $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../logs/info.log', MonologLogger::INFO));
+        $level = constant('Monolog\Logger::' . strtoupper($GLOBALS['config']['logs']['fileLevel']));
+        $this->logger->pushHandler(new StreamHandler(__DIR__ . '/../../logs/info.log', $level));
 
         // Add the custom PDOHandler for error logging
         try {

@@ -14,6 +14,8 @@ $GLOBALS['config']['db'] = [
     ]
 ];
 
+$GLOBALS['config']['logs']['fileLevel'] = "INFO";
+
 $GLOBALS['config']['advice']['enabled'] = false;
 $GLOBALS['config']['advice']['model'] = "gpt-4o-mini";
 $GLOBALS['config']['advice']['charLimit'] = 500;
