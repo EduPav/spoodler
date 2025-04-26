@@ -1,5 +1,12 @@
 # Spoodler
 
+**Author:** [Eduardo Martin Pavez Fabriani](https://www.linkedin.com/in/eduardo-pavez/)
+
+Documentation can be found [here](#documentation).
+
+Demo is available [here](https://www.youtube.com/watch?v=uPPtOJwv5cc).
+[![alt text](./docs/img/table_example.png)](https://www.youtube.com/watch?v=uPPtOJwv5cc)
+
 ## Quickstart
 
 - Install [Docker](https://www.docker.com/)
